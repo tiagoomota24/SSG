@@ -1,0 +1,46 @@
+ /* Navbar.css */
+ .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff; /* Cor de fundo desejada */
+    color: rgb(255, 255, 255); /* Cor do texto desejada */
+    border-bottom: 1px solid #000000; /* Linha horizontal como borda inferior */
+  }
+  
+  .logo img {
+    height: 100px; /* Altura desejada para o logo */
+  }
+  
+  .menu-section {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Adiciona centralização horizontal */
+    flex: 1; /* Permite que a seção do menu ocupe o espaço disponível */
+  }
+  
+  .menu-section .login-icon {
+    height: 50px; /* Altura desejada para o ícone de login */
+  }
+  
+  .menu-section a {
+    margin-right: 150px; /* Ajuste o espaçamento entre os itens do menu */
+    color: rgb(0, 0, 0); /* Cor do texto desejada */
+    text-decoration: none;
+    font-size: 20px; /* Tamanho da fonte desejada */    
+  }
+  
+  .menu-section a:last-child {
+    margin-right: 0; /* Remove a margem à direita do último item do menu */
+  }
+  
+  .menu-section a:hover,
+  .menu-section a.selected { /* Adiciona um estilo para o item selecionado */
+      text-decoration: underline; /* Adiciona sublinhado ao passar o mouse sobre ou quando selecionado */
+  }
+  
+  .menu-section a.selected {
+      background-color: #ffffff; /* Cor de fundo para indicar seleção */
+      color: #4ea495; /* Cor do texto quando o item está selecionado */
+  }
