@@ -4,9 +4,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #ffffff; /* Cor de fundo desejada */
+    background-color: #eeeaea; /* Cor de fundo desejada */
     color: rgb(255, 255, 255); /* Cor do texto desejada */
-    border-bottom: 1px solid #000000; /* Linha horizontal como borda inferior */
+    /* border-bottom: 1px solid #000000; */ /* Linha horizontal como borda inferior */
   }
   
   .logo img {
