@@ -16,6 +16,7 @@
   .menu-section {
     display: flex;
     align-items: center;
+    font-family: Arial, sans-serif;
     justify-content: center; /* Adiciona centralização horizontal */
     flex: 1; /* Permite que a seção do menu ocupe o espaço disponível */
   }
