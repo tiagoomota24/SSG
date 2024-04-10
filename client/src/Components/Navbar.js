@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/Icon.png";
 import Loginicon from "../assets/Loginicon.png";
 import "../styles/Navbar.css";
+import "../styles/t.css";
 
 export default function Navbar() {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -27,13 +28,29 @@ export default function Navbar() {
         </div>
       </Link>
       <div className="menu-section">
-        <Link
+        <ul>
+          <li>
+            <a href="#"> </a>
+          </li>
+          <li>
+            <a href="#"> Segurança Digital ▼</a>
+            <ul className="dropdown">
+              <li>
+                <a href="#"> Digital</a>
+              </li>
+              <li>
+                <a href="#"> Física</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        {/* <Link
           to="/seguranca_digital"
           className={selectedItem === "seguranca_digital" ? "selected" : ""}
           onClick={() => handleItemClick("seguranca_digital")}
         >
           Seguranca Digital
-        </Link>
+        </Link> */}
         <Link
           to="/jogos"
           className={selectedItem === "jogos" ? "selected" : ""}

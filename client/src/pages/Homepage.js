@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
+import "../styles/t.css";
 
 function Homepage() {
-    
   return (
-    <div>Homepage</div>
-  )
+    <div>Home </div>
+  );
 }
 
-export default Homepage
+export default Homepage;

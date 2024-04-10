@@ -42,6 +42,6 @@
   }
   
   .menu-section a.selected {
-      background-color: #ffffff; /* Cor de fundo para indicar seleção */
+      background-color: #eeeaea; /* Cor de fundo para indicar seleção */
       color: #4ea495; /* Cor do texto quando o item está selecionado */
   }
