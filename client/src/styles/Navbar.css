@@ -32,6 +32,16 @@
     font-size: 20px; /* Tamanho da fonte desejada */    
   }
   
+  .menu-item {
+    margin-right: 150px; /* Ajuste o espaçamento entre os itens do menu */
+  } 
+
+  #dropdownMenuButton1 {
+    background-color: #eeeaea; /* Cor de fundo desejada */
+    color: rgb(0, 0, 0); /* Cor do texto desejada */
+    border: none; /* Remove a borda do botão */
+  }
+
   .menu-section a:last-child {
     margin-right: 0; /* Remove a margem à direita do último item do menu */
   }

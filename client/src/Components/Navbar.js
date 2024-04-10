@@ -4,6 +4,8 @@ import Logo from "../assets/Icon.png";
 import Loginicon from "../assets/Loginicon.png";
 import "../styles/Navbar.css";
 import "../styles/t.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Dropdown } from 'react-bootstrap';
 
 export default function Navbar() {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -28,22 +30,17 @@ export default function Navbar() {
         </div>
       </Link>
       <div className="menu-section">
-        <ul>
-          <li>
-            <a href="#"> </a>
-          </li>
-          <li>
-            <a href="#"> Segurança Digital ▼</a>
-            <ul className="dropdown">
-              <li>
-                <a href="#"> Digital</a>
-              </li>
-              <li>
-                <a href="#"> Física</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+      <Dropdown className="menu-item">
+        <Dropdown.Toggle variant="secondary" id="dropdownMenuButton1">
+          Seguranca Digital
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item href="#">Phishing</Dropdown.Item>
+          <Dropdown.Item href="#">B</Dropdown.Item>
+          <Dropdown.Item href="#">Top</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
         {/* <Link
           to="/seguranca_digital"
           className={selectedItem === "seguranca_digital" ? "selected" : ""}
