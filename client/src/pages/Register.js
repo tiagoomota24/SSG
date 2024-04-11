@@ -25,7 +25,7 @@ function Registration() {
     axios.post("http://localhost:3001/auth/checkUsername", { username: data.username })
       .then((response) => {
         if (response.data.exists) {
-          alert("Nome de usuário já existe!");
+          alert("Nome de utilizador já existe!");
         } else {
           axios.post("http://localhost:3001/auth/checkEmail", { email: data.email })
             .then((response) => {

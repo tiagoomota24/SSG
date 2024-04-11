@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/Icon.png";
 import Loginicon from "../assets/Loginicon.png";
 import "../styles/Navbar.css";
-import "../styles/t.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Dropdown } from 'react-bootstrap';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Dropdown } from "react-bootstrap";
 
 export default function Navbar() {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -30,24 +29,19 @@ export default function Navbar() {
         </div>
       </Link>
       <div className="menu-section">
-      <Dropdown className="menu-item">
-        <Dropdown.Toggle variant="secondary" id="dropdownMenuButton1">
-          Seguranca Digital
-        </Dropdown.Toggle>
+        <Dropdown className="menu-item">
+          <Dropdown.Toggle variant="secondary" id="dropdownMenuButton1">
+            Seguranca Digital
+          </Dropdown.Toggle>
 
-        <Dropdown.Menu>
-          <Dropdown.Item href="#">Phishing</Dropdown.Item>
-          <Dropdown.Item href="#">B</Dropdown.Item>
-          <Dropdown.Item href="#">Top</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-        {/* <Link
-          to="/seguranca_digital"
-          className={selectedItem === "seguranca_digital" ? "selected" : ""}
-          onClick={() => handleItemClick("seguranca_digital")}
-        >
-          Seguranca Digital
-        </Link> */}
+          <Dropdown.Menu>
+            <Dropdown.Item as={Link} to="/phishing">
+              Phishing
+            </Dropdown.Item>
+            <Dropdown.Item href="#">B</Dropdown.Item>
+            <Dropdown.Item href="#">Top</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
         <Link
           to="/jogos"
           className={selectedItem === "jogos" ? "selected" : ""}
