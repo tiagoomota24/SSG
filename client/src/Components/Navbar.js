@@ -38,8 +38,8 @@ export default function Navbar() {
             <Dropdown.Item as={Link} to="/phishing">
               Phishing
             </Dropdown.Item>
-            <Dropdown.Item href="#">B</Dropdown.Item>
-            <Dropdown.Item href="#">Top</Dropdown.Item>
+            <Dropdown.Item href="#">Malware</Dropdown.Item>
+            <Dropdown.Item href="#">Ransomware</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <Link

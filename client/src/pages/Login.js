@@ -34,9 +34,9 @@ function Login() {
             login();
           }}
         >
-          <h2>Bem vindo ao SSG</h2>
+          <h2>Bem-vindo ao SSG</h2>
           <div className="input-box">
-            <label>Username</label>
+            <label>Utilizador</label>
             <input
               type="text"
               onChange={(event) => {
@@ -46,7 +46,7 @@ function Login() {
             <FaUser className="icon" />
           </div>
           <div className="input-box">
-            <label>Password</label>
+            <label>Palavra-passe</label>
             <input
               type="password"
               onChange={(event) => {
@@ -56,14 +56,14 @@ function Login() {
             <FaLock className="icon" />
           </div>
           <div className="remember-forgot">
-            <label>
+{/*             <label>
               <input type="checkbox" /> Lembrar-me
-            </label>
+            </label> */}
             <a href="/">Esqueceu-se da palavra-passe?</a>
           </div>
-          <button type="submit">Login</button>{" "}
+          <button type="submit">Entrar</button>{" "}
           <div className="register-link">
-            <p>
+            <p> 
               Não tens conta? <a href="/register">Criar Conta</a>{" "}
             </p>
           </div>

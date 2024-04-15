@@ -12,13 +12,17 @@ function Registration() {
   const initialValues = {
     username: "",
     password: "",
-    email: ""
-  };
+    email: "",
+    confirmPassword: ""
+    };
 
   const validationSchema = Yup.object().shape({
     username: Yup.string().min(3, 'O Utilizador deve ter pelo menos 3 caracteres').max(15, 'O Utilizador deve ter no máximo 15 caracteres').required('Obrigatório!'),
-    password: Yup.string().min(4, 'A senha deve ter pelo menos 4 caracteres').max(20, 'A senha deve ter no máximo 20 caracteres').required('Obrigatório!'),
-    email: Yup.string().email('O endereço de email é inválido').required('Obrigatório!')
+    password: Yup.string().min(8, 'A senha deve ter pelo menos 8 caracteres').max(20, 'A senha deve ter no máximo 20 caracteres')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/,"Deve incluir maiúsculas, minúsculas e números")
+    .required('Obrigatório!'),
+    email: Yup.string().email('O endereço de email é inválido').required('Obrigatório!'),
+    confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Confirm Password is required'),
   });
 
   const onSubmit = (data) => {
@@ -53,7 +57,7 @@ function Registration() {
         >
           <Form className="formContainer">
             <div className="input-box">
-              <label>Username: </label>
+              <label>Utilizador: </label>
               <Field
                 autoComplete="off"
                 id="inputCreatePost1"
@@ -73,7 +77,7 @@ function Registration() {
               <ErrorMessage name="email" component="span" />
             </div>
             <div className="input-box">
-              <label>Password: </label>
+              <label>Palavra-passe: </label>
               <Field
                 autoComplete="off"
                 type="password"
@@ -83,7 +87,18 @@ function Registration() {
               />
               <ErrorMessage name="password" component="span" />
             </div>
-            <button type="submit"> Register</button>
+            <div className="input-box">
+              <label>Confirmar Palavra-passe: </label>
+              <Field
+                autoComplete="off"
+                type="password"
+                id="inputCreatePost4"
+                name="confirmPassword"
+                placeholder="Confirme a senha..."
+              />
+                <ErrorMessage name="confirmPassword" component="span" />
+            </div>
+            <button type="submit"> Criar</button>
           </Form>
         </Formik>
       </div>
