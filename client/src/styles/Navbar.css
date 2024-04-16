@@ -68,3 +68,19 @@
       background-color: #eeeaea; /* Cor de fundo para indicar seleção */
       color: #4ea495; /* Cor do texto quando o item está selecionado */
   }
+
+  @media (max-width: 1000px) {
+    .logo img {
+      height: 80px; /* Reduzi a altura do logo para dispositivos móveis */
+      margin-left: 10px; /* Reduzi a margem para dispositivos móveis */
+    }
+    
+    .menu-section a {
+      margin-right: 10px; /* Reduzi o espaçamento entre os itens do menu para dispositivos móveis */
+      font-size: 14px; /* Reduzi o tamanho da fonte para dispositivos móveis */
+    }
+    
+    .menu-item {
+      margin-right: 10px; /* Reduzi o espaçamento entre os itens do menu para dispositivos móveis */
+    }
+  }

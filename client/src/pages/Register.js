@@ -24,8 +24,9 @@ function Registration() {
     email: Yup.string().email('O endereço de email é inválido').required('Obrigatório!'),
     confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Confirm Password is required'),
   });
-
+   
   const onSubmit = (data) => {
+
     axios.post("http://localhost:3001/auth/checkUsername", { username: data.username })
       .then((response) => {
         if (response.data.exists) {
