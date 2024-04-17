@@ -23,9 +23,13 @@
   }
   
   .menu-section .login-icon {
-    height: 50px; /* Altura desejada para o ícone de login */
+    height: 25px; /* Altura desejada para o ícone de login */
   }
-  
+
+  .login-icon{
+    margin-right: 10px; /* Ajusta o espaçamento entre os itens do menu */
+  }
+
   .menu-section a {
     margin-right: 150px; /* Ajusta o espaçamento entre os itens do menu */
     color: rgb(0, 0, 0); /* Cor do texto desejado */

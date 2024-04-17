@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/Icon.png";
 import Loginicon from "../assets/Loginicon.png";
 import "../styles/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Dropdown } from "react-bootstrap";
+import { AuthContext } from "../helpers/AuthContex";
 
-export default function Navbar() {
+export default function Navbar({onLogout}) {
   const [selectedItem, setSelectedItem] = useState(null);
+  const { authState, setAuthState } = useContext(AuthContext);
+  const [isLoggedIn, setIsLoggedIn] = useState(authState.status);
+
+
+
+  useEffect(() => {
+    setIsLoggedIn(authState.status);
+  }, [authState]);
 
   const handleItemClick = (itemName) => {
     setSelectedItem(itemName);
@@ -19,6 +28,11 @@ export default function Navbar() {
 
   const handleLoginClick = () => {
     setSelectedItem(null); // Remove a seleção ao clicar no ícone de login
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    setAuthState(false);
   };
 
   return (
@@ -58,9 +72,18 @@ export default function Navbar() {
         >
           Tabela De Classificação
         </Link>
-        <Link to="/login" onClick={handleLoginClick}>
-          <img src={Loginicon} alt="Login" className="login-icon" />
-        </Link>
+        {!isLoggedIn ? (
+          <>
+            <Link to="/login" onClick={handleLoginClick}>
+              <img src={Loginicon} alt="Login" className="login-icon" />
+              Login
+            </Link>
+          </>
+        ) : (
+          <button onClick={handleLogout} className="logout-button">
+            Logout
+          </button>
+        )}
       </div>
     </nav>
   );
