@@ -7,12 +7,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Dropdown } from "react-bootstrap";
 import { AuthContext } from "../helpers/AuthContex";
 
-export default function Navbar({onLogout}) {
+export default function Navbar() {
   const [selectedItem, setSelectedItem] = useState(null);
   const { authState, setAuthState } = useContext(AuthContext);
   const [isLoggedIn, setIsLoggedIn] = useState(authState.status);
 
-
+  
 
   useEffect(() => {
     setIsLoggedIn(authState.status);

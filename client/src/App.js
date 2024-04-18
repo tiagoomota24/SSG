@@ -11,16 +11,45 @@ import axios from "axios";
 
 function App() {
 
-  const [authState, setAuthState] = useState(false);
+  const [authState, setAuthState] = useState({
+    status: !!localStorage.getItem("accessToken"),
+  });
+  
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      setAuthState({ status: false });
+    }
+  }, []);
 
   useEffect(() => {
-   axios.get("http://localhost:3001/auth/auth", {headers: {accessToken: localStorage.getItem("accessToken"),},}).then((response) => {
-    if (response.data.error) {
-      setAuthState(false);
-    }else{
-      setAuthState(true);
+    if (authState.status) {
+      axios
+        .get("http://localhost:3001/auth/auth", {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+        .then((response) => {
+          if (response.data.error) {
+            setAuthState({ status: false });
+          }
+        })
+        .catch((error) => {
+          console.error("Error checking authentication status:", error);
+        });
     }
-    });
+  }, [authState.status]);
+  
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === "accessToken" && !e.newValue) {
+        setAuthState({ status: false });
+      }
+    };
+  
+    window.addEventListener("storage", handleStorageChange);
+  
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
   return (
@@ -30,8 +59,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/login" element={!authState ? <Login /> : <Homepage />} />
-          <Route path="/register" element={!authState ? <Register /> : <Homepage />} />
+          <Route path="/login" element={localStorage.getItem("accessToken") ? <Homepage /> : <Login />} />
+          <Route path="/register" element={localStorage.getItem("accessToken") ? <Homepage /> : <Register />} />
           <Route path="/phishing" element={<Phishing />} />
         </Routes>
       </Router>
