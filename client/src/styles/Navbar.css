@@ -73,18 +73,30 @@
       color: #4ea495; /* Cor do texto quando o item está selecionado */
   }
 
+  .logout-button{
+    border: none; /* Remove a borda do botão */
+    background-color: #eeeaea; /* Cor de fundo desejado */
+  }
+  
   @media (max-width: 1000px) {
     .logo img {
-      height: 80px; /* Reduzi a altura do logo para dispositivos móveis */
-      margin-left: 10px; /* Reduzi a margem para dispositivos móveis */
+      height: 50px;
+      margin-left: 10px;
     }
-    
+  
     .menu-section a {
-      margin-right: 10px; /* Reduzi o espaçamento entre os itens do menu para dispositivos móveis */
-      font-size: 14px; /* Reduzi o tamanho da fonte para dispositivos móveis */
+      margin-right: 10px;
+      font-size: 14px;
     }
-    
+  
     .menu-item {
-      margin-right: 10px; /* Reduzi o espaçamento entre os itens do menu para dispositivos móveis */
+      margin-right: 10px;
+    }
+  
+    #dropdownMenuButton1 {
+      font-size: 14px;
     }
   }
+
+  
+  

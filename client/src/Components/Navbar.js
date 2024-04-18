@@ -6,13 +6,13 @@ import "../styles/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Dropdown } from "react-bootstrap";
 import { AuthContext } from "../helpers/AuthContex";
+import { IoIosLogOut } from "react-icons/io";
 
-export default function Navbar() {
+export default function Navbar({onLogout}) {
   const [selectedItem, setSelectedItem] = useState(null);
   const { authState, setAuthState } = useContext(AuthContext);
   const [isLoggedIn, setIsLoggedIn] = useState(authState.status);
 
-  
 
   useEffect(() => {
     setIsLoggedIn(authState.status);
@@ -81,7 +81,8 @@ export default function Navbar() {
           </>
         ) : (
           <button onClick={handleLogout} className="logout-button">
-            Logout
+            <IoIosLogOut className="icon" />
+            Terminar-sessão
           </button>
         )}
       </div>
