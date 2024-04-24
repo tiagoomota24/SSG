@@ -1,0 +1,67 @@
+/* Estilos para a página de Classificação */
+
+/* Estilo para o container */
+.classificacao-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Estilo para o título "Classificação" */
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Estilo para a tabela */
+  .classificacao-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  /* Estilo para as células da tabela */
+  .classificacao-table th,
+  .classificacao-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #6e6e6e; /* Linha horizontal em preto entre as linhas */
+    border-right: 1px solid #6e6e6e; /* Linha vertical em preto entre as colunas */
+  }
+  
+  /* Estilo para o cabeçalho da tabela */
+  .classificacao-table th {
+    background-color: none;
+    color: #000000;
+  }
+  
+  /* Estilo para as células da tabela (linhas alternadas) */
+  .classificacao-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Estilo para as células da tabela com base na posição */
+  .classificacao-table .posicao-1 {
+    background-color: #CBB765;
+    color: #ffffff;
+  }
+  
+  .classificacao-table .posicao-2 {
+    background-color: #E5E5E5; /* Cor mais prata para o segundo lugar */
+    color: #000000; /* Cor do texto */
+  }
+  
+  .classificacao-table .posicao-3 {
+    background-color: #A86243;
+    color: #ffffff;
+  }
+  
+  /* Estilo para as posições restantes */
+  .classificacao-table tbody tr:not(.posicao-1):not(.posicao-2):not(.posicao-3) {
+    background-color: #B3B3B3;
+    color: #ffffff;
+  }
+  

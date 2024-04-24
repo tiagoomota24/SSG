@@ -1,0 +1,88 @@
+/* Estilos para o componente Jogos */
+
+/* Estilo para o título "Jogos" */
+h1 {
+    text-align: center;
+  }
+  
+  /* Estilo para o container de jogos */
+  .jogos-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinhar no topo */
+    height: 80vh; /* Altura da seção de jogos, ajuste conforme necessário */
+    gap: 20px; /* Espaço entre os jogos */
+  }
+  
+  /* Estilo para cada item de jogo */
+  .jogo-item {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    text-align: center; /* Para centralizar o botão */
+    overflow: hidden; /* Para esconder o conteúdo que sai dos limites */
+    border-radius: 8px; /* Borda arredondada */
+  }
+  
+  /* Estilo para a imagem do jogo */
+  .jogo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Para garantir que a imagem cubra todo o espaço */
+    transition: transform 0.3s ease; /* Efeito de transição suave */
+  }
+  
+  /* Estilo para o overlay (descrição e botão) */
+  .jogo-description {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    color: #ffffff; /* Cor do texto branco */
+    padding: 20px;
+    opacity: 0; /* Inicialmente invisível */
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Estilo para o texto do jogo */
+  .jogo-text {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilo para o botão de "Jogar" */
+  .jogo-button {
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Estilo do botão quando o mouse passa por cima */
+  .jogo-button:hover {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  /* Estilo do overlay quando o jogo está com hover */
+  .jogo-item.hovered .jogo-description {
+    opacity: 1;
+  }
+  
+  /* Efeito de escurecimento da imagem quando o overlay está ativo */
+  .jogo-item.hovered .jogo-image {
+    transform: scale(1.1); /* Aumenta um pouco a escala */
+  }
+  

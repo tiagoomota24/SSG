@@ -22,7 +22,7 @@ function Registration() {
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/,"Deve incluir maiúsculas, minúsculas e números")
     .required('Obrigatório!'),
     email: Yup.string().email('O endereço de email é inválido').required('Obrigatório!'),
-    confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Confirm Password is required'),
+    confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Palavra-passe deve corresponder').required('Confirmar a palavra-passe!'),
   });
    
   const onSubmit = (data) => {

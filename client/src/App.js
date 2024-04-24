@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Navbar from "./Components/Navbar";
+import Nav from "./Components/Nav";
 import Phishing from "./pages/Phishing";
+import Jogos from "./pages/Jogos";
+import Classificacao from "./pages/Classificacao";
 import { AuthContext } from "./helpers/AuthContex";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -56,12 +58,14 @@ function App() {
     <div className="App">
       <AuthContext.Provider value={{authState, setAuthState}}>
       <Router>
-        <Navbar />
+        <Nav />
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={localStorage.getItem("accessToken") ? <Homepage /> : <Login />} />
           <Route path="/register" element={localStorage.getItem("accessToken") ? <Homepage /> : <Register />} />
           <Route path="/phishing" element={<Phishing />} />
+          <Route path="/jogos" element={<Jogos />} />
+          <Route path="/tabela_de_classificacao" element={<Classificacao />} /> 
         </Routes>
       </Router>
       </AuthContext.Provider>
