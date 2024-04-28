@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import Quiz from "../assets/quiz.png";
+import { useNavigate } from "react-router-dom";
+import Quizz from "../assets/quiz.png";
 import Jet from "../assets/jet.png";
 import "../styles/Jogos.css";
 
 function Jogos() {
   const [hoveredGame, setHoveredGame] = useState(null);
+  const navigate = useNavigate();
 
   const handleMouseEnter = (game) => {
     setHoveredGame(game);
@@ -14,6 +16,10 @@ function Jogos() {
     setHoveredGame(null);
   };
 
+  const handlePlayClick = () => {
+    navigate("/quiz");
+  };
+
   return (
     <>
       <h1>Jogos</h1>
@@ -21,10 +27,11 @@ function Jogos() {
         <div
           onMouseEnter={() => handleMouseEnter("Quiz")}
           onMouseLeave={handleMouseLeave}
+          onClick={handlePlayClick}
           className={`jogo-item ${hoveredGame === "Quiz" ? "hovered" : ""}`}
         >
           <img
-            src={Quiz}
+            src={Quizz}
             alt="Jogo Quiz"
             className="jogo-image"
           />

@@ -7,6 +7,7 @@ import Nav from "./Components/Nav";
 import Phishing from "./pages/Phishing";
 import Jogos from "./pages/Jogos";
 import Classificacao from "./pages/Classificacao";
+import Quiz from "./pages/Quiz";
 import { AuthContext } from "./helpers/AuthContex";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -66,6 +67,7 @@ function App() {
           <Route path="/phishing" element={<Phishing />} />
           <Route path="/jogos" element={<Jogos />} />
           <Route path="/tabela_de_classificacao" element={<Classificacao />} /> 
+          <Route path="/quiz" element={<Quiz />} />
         </Routes>
       </Router>
       </AuthContext.Provider>
