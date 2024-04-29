@@ -80,6 +80,8 @@ function Quiz() {
   
       if (response.data.error) {
         setErrorMessage('Erro ao salvar a pontuação:' + response.data.error);
+      }else{
+        setErrorMessage('Pontuação salva com sucesso!');
       }
     } catch (error) {
       setErrorMessage('Erro ao salvar a pontuação:' + error);
