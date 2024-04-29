@@ -1,0 +1,93 @@
+/* Estilo para o container do quiz */
+.quiz-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Estilo para o título "Quiz" */
+  h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+  }
+  
+  /* Estilo para as perguntas */
+  .question-container {
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo para as opções de resposta */
+  ul {
+    padding: 0;
+    list-style-type: none; /* Remover os pontinhos da lista */
+  }
+  
+  .option-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000000;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .option-button:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .selected {
+    background-color: #007bff;
+    color: #fff;
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  /* Estilo para o botão "Próxima Pergunta" */
+  .next-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .next-button:hover {
+    background-color: #218838;
+  }
+  
+  /* Estilo para a mensagem de erro */
+  .error-message {
+    color: #dc3545;
+    font-size: 16px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  

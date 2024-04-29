@@ -5,5 +5,9 @@ module.exports = function (sequelize, DataTypes) {
     email: DataTypes.STRING,
   });
 
+  User.associate = (models) => {
+    User.hasMany(models.Score);
+  };
+
   return User;
 };

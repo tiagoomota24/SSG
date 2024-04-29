@@ -11,6 +11,9 @@ const db = require("./models");
 const userRouter = require("./routes/User");
 app.use("/auth", userRouter);
 
+const scoreRouter = require("./routes/Score");
+app.use("/score", scoreRouter);
+
 db.sequelize.sync().then(() => {
   app.listen(3001, () => {
     console.log("Server está a correr na porta 3001");
