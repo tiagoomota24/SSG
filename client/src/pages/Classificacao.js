@@ -1,14 +1,56 @@
-import React from 'react';
-import '../styles/Classificacao.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "../styles/Classificacao.css";
 
 function Classificacao() {
-  const jogadores = [
-    { posicao: 1, nome: 'Jogador 1', score: 100, tempo: '00:30' },
-    { posicao: 2, nome: 'Jogador 2', score: 90, tempo: '00:45' },
-    { posicao: 3, nome: 'Jogador 3', score: 80, tempo: '01:00' },
-    { posicao: 4, nome: 'Jogador 4', score: 70, tempo: '01:15' },
-    // Adicione mais jogadores conforme necessário
-  ];
+  const [jogadores, setJogadores] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/score/get-scores")
+      .then((response) => {
+        if (Array.isArray(response.data)) {
+          const jogadoresMelhoresResultados = encontrarMelhoresResultados(
+            response.data
+          );
+          setJogadores(jogadoresMelhoresResultados);
+        } else {
+          console.error("");
+        }
+      })
+      .catch((error) => {
+        console.error("");
+      });
+  }, []);
+
+  const encontrarMelhoresResultados = (resultados) => {
+    const melhoresResultadosMap = new Map();
+  
+    resultados.forEach((resultado) => {
+      const jogador = resultado.User.username;
+      if (!melhoresResultadosMap.has(jogador)) {
+        melhoresResultadosMap.set(jogador, resultado);
+      } else {
+        const resultadoExistente = melhoresResultadosMap.get(jogador);
+        if (resultado.score > resultadoExistente.score || (resultado.score === resultadoExistente.score && resultado.time < resultadoExistente.time)) {
+          melhoresResultadosMap.set(jogador, resultado);
+        }
+      }
+    });
+  
+    return Array.from(melhoresResultadosMap.values()).sort((a, b) => {
+      if (b.score === a.score) {
+        return a.time - b.time;
+      }
+      return b.score - a.score;
+    });
+  };
+
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+  }
 
   return (
     <div className="classificacao-container">
@@ -23,23 +65,15 @@ function Classificacao() {
           </tr>
         </thead>
         <tbody>
-          {jogadores.map(jogador => (
-            <tr
-              key={jogador.posicao}
-              className={`
-                classificacao-row
-                ${jogador.posicao === 1 ? 'posicao-1' : ''}
-                ${jogador.posicao === 2 ? 'posicao-2' : ''}
-                ${jogador.posicao === 3 ? 'posicao-3' : ''}
-                ${jogador.posicao === 4 ? 'posicao-4' : ''}
-              `}
-            >
-              <td>{jogador.posicao}</td>
-              <td>{jogador.nome}</td>
-              <td>{jogador.score}</td>
-              <td>{jogador.tempo}</td>
-            </tr>
-          ))}
+          {Array.isArray(jogadores) &&
+            jogadores.map((jogador, index) => (
+              <tr key={index} className={`classificacao-row ${index === 0 ? "posicao-1" : ""} ${index === 1 ? "posicao-2" : ""} ${index === 2 ? "posicao-3" : ""}`}>
+                <td>{index + 1}</td>
+                <td>{jogador.User.username}</td>
+                <td>{jogador.score}</td>
+                <td>{formatTime(jogador.time)}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

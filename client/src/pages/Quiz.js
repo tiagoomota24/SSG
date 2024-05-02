@@ -88,6 +88,12 @@ function Quiz() {
     }
   }
 
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+  }
+
   return (
     <div className="quiz-container">
       {!isPlaying && currentQuestion === 0 && (
@@ -120,7 +126,7 @@ function Quiz() {
         <div>
           <h2>Quiz Concluído!</h2>
           <p>Pontuação Final: {score} de {questions.reduce((acc, curr) => acc + curr.points, 0)} pontos</p>
-          <p>Tempo: {timer} segundos</p>
+          <p>Tempo: {formatTime(timer)} segundos</p>
           {errorMessage && <p className="error-message">{errorMessage}</p>}
           <button className="next-button" onClick={saveScore}>Guardar pontuação</button>
           <button className="next-button" onClick={handlePlayClick}>Tentar Novamente</button>

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { validateToken } = require('../middlewares/AuthMiddleware');
-const { Score } = require('../models'); 
+const { Score, User } = require('../models'); 
 
 router.post('/save-score', validateToken, async (req, res) => {
   // Verifique se o usuário está autenticado
@@ -26,6 +26,21 @@ router.post('/save-score', validateToken, async (req, res) => {
     // Envie uma resposta de erro se algo der errado
     console.error('Erro ao salvar a pontuação:', error);
     res.status(500).send('Houve um erro ao salvar sua pontuação. Por favor, tente novamente mais tarde.');
+  }
+});
+
+router.get('/get-scores', async (req, res) => {
+  try {
+    const scores = await Score.findAll({
+      include: {
+        model: User,
+        attributes: ['username'],
+      },
+    });
+    res.json(scores);
+  } catch (error) {
+    console.error('Erro ao buscar as pontuações:', error);
+    res.status(500).send('Houve um erro ao buscar as pontuações. Por favor, tente novamente mais tarde.');
   }
 });
 
