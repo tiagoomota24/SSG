@@ -6,6 +6,7 @@ import Logo from "../assets/Icon.png";
 import Loginicon from "../assets/Loginicon.png";
 import { AuthContext } from "../helpers/AuthContex";
 import { IoIosLogOut } from "react-icons/io";
+import { MdAccountCircle } from "react-icons/md";
 
 const MyNavbar = ({ onLogout }) => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -70,10 +71,16 @@ const MyNavbar = ({ onLogout }) => {
                 Login
               </Nav.Link>
             ) : (
+              <>
+              <NavDropdown title={<><MdAccountCircle className="icon" /> Conta</>} id="basic-nav-dropdown">
+                <NavDropdown.Item as={Link} to="/detalhes-da-conta" onClick={() => handleItemClick("detalhes-da-conta")} className={selectedItem === "detalhes-da-conta" ? "active" : ""}>Detalhe da Conta</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/historico" onClick={() => handleItemClick("historico")} className={selectedItem === "historico" ? "active" : ""}>Histórico</NavDropdown.Item>
+              </NavDropdown>
               <Nav.Link onClick={handleLogout} className="logout-button">
                 <IoIosLogOut className="icon" />
                 Terminar-sessão
               </Nav.Link>
+            </>
             )}
           </Nav>
         </Navbar.Collapse>

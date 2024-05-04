@@ -8,9 +8,14 @@ import Phishing from "./pages/Phishing";
 import Jogos from "./pages/Jogos";
 import Classificacao from "./pages/Classificacao";
 import Quiz from "./pages/Quiz";
+import DetalhesConta from "./pages/DetalhesConta";
+import EditPassword from "./pages/EditPassword";
+import EditEmail from "./pages/EditEmail";
 import { AuthContext } from "./helpers/AuthContex";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -59,6 +64,7 @@ function App() {
     <div className="App">
       <AuthContext.Provider value={{authState, setAuthState}}>
       <Router>
+      <ToastContainer />
         <Nav />
         <Routes>
           <Route path="/" element={<Homepage />} />
@@ -68,6 +74,9 @@ function App() {
           <Route path="/jogos" element={<Jogos />} />
           <Route path="/tabela_de_classificacao" element={<Classificacao />} /> 
           <Route path="/quiz" element={<Quiz />} />
+          <Route path="/detalhes-da-conta" element={<DetalhesConta />} />
+          <Route path="/editar-senha" element={<EditPassword />} />
+          <Route path="/editar-email" element={<EditEmail />} />
         </Routes>
       </Router>
       </AuthContext.Provider>

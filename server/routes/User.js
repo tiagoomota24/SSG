@@ -62,4 +62,49 @@ router.get("/auth", validateToken, (req, res) => {
   res.json(req.user);
 });
 
+router.get("/userDetails", validateToken, async (req, res) => {
+  try {
+    const user = await User.findByPk(req.user.id); // Encontrar o usuário pelo id
+    if (!user) {
+      return res.status(404).json({ error: "Utilizador não encontrado!" });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error("Erro ao buscar detalhes do usuário:", error);
+    res.status(500).json({ error: "Erro interno do servidor" });
+  }
+});
+
+router.put('/changeEmail', validateToken, async (req, res) => {
+  const { currentEmail, newEmail } = req.body;
+
+  try {
+    const currentUser = await User.findOne({ where: { id: req.user.id } });
+
+    if (currentUser.email !== currentEmail) {
+      return res.status(400).json({ error: 'O email atual não corresponde.' });
+    }
+
+    const emailExists = await User.findOne({ where: { email: newEmail } });
+
+    if (emailExists) {
+      return res.status(400).json({ error: 'O email já está em uso.' });
+    }
+
+    const user = await User.update(
+      { email: newEmail },
+      { where: { id: req.user.id } }
+    );
+
+    if (!user) {
+      return res.status(404).json({ error: 'Usuário não encontrado.' });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Ocorreu um erro ao tentar alterar o email.' });
+  }
+});
+
 module.exports = router;

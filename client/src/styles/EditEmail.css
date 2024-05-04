@@ -1,0 +1,77 @@
+/* Adapte o CSS do EditEmail para ser semelhante ao Login.css */
+
+.edit-email-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 83vh;
+  }
+  
+  .edit-email-wrapper {
+    width: 420px;
+    background-color: rgb(238, 234, 234);
+    color: #000000;
+    border-radius: 10px;
+    padding: 30px 40px;
+  }
+  
+  .edit-email-wrapper h2 {
+    font-size: 27px;
+    text-align: center;
+    font-family: 'Permanent Marker', cursive;
+  }
+  
+  .edit-email-input-box {
+    position: relative;
+    width: 100%;
+    margin: 20px 0;
+  }
+  
+  .edit-email-input-box input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #000000;
+    padding: 20px 45px 20px 20px;
+  }
+  
+  .edit-email-input-box input::placeholder {
+    color: #000000;
+  }
+  
+  .edit-email-input-box .icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+  }
+  
+  .edit-email-button {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 700;
+    margin-top: 20px;
+  }
+  
+  .edit-email-input-box label {
+    position: absolute;
+    top: -10px;
+    transform: translateY(-50%);
+    color: #000000;
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+  }
+  

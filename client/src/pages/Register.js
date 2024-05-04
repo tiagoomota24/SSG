@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import "../styles/Login.css";
 import {useNavigate} from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Registration() {
 
@@ -30,15 +31,15 @@ function Registration() {
     axios.post("http://localhost:3001/auth/checkUsername", { username: data.username })
       .then((response) => {
         if (response.data.exists) {
-          alert("Nome de utilizador já existe!");
+          toast.error("Nome de utilizador já existe!");
         } else {
           axios.post("http://localhost:3001/auth/checkEmail", { email: data.email })
             .then((response) => {
               if (response.data.exists) {
-                alert("Email já está em uso!");
+                toast.error("Email já está em uso!");
               } else {
                 axios.post("http://localhost:3001/auth", data).then((response) => {
-                  console.log(response);
+                  toast.success('Conta criada com sucesso!');
                   navigate("/login");
                 });
               }
