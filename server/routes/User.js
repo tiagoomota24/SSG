@@ -97,13 +97,39 @@ router.put('/changeEmail', validateToken, async (req, res) => {
     );
 
     if (!user) {
-      return res.status(404).json({ error: 'Usuário não encontrado.' });
+      return res.status(404).json({ error: 'Utilizador não encontrado.' });
     }
 
     res.json(user);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Ocorreu um erro ao tentar alterar o email.' });
+  }
+});
+
+router.put('/changePassword', validateToken, async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+
+  try {
+    const currentUser = await User.findOne({ where: { id: req.user.id } });
+
+    // Verifique se a senha atual está correta
+    const validPassword = await bcrypt.compare(currentPassword, currentUser.password);
+    if (!validPassword) {
+      return res.status(400).json({ error: 'A senha atual está incorreta.' });
+    }
+
+    // Hash da nova senha antes de armazená-la
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Atualize a senha do usuário
+    currentUser.password = hashedPassword;
+    await currentUser.save();
+
+    res.json({ message: 'Senha alterada com sucesso.' });
+  } catch (error) {
+    console.error("Erro ao alterar a senha:", error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
   }
 });
 

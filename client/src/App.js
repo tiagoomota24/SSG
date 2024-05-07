@@ -11,6 +11,7 @@ import Quiz from "./pages/Quiz";
 import DetalhesConta from "./pages/DetalhesConta";
 import EditPassword from "./pages/EditPassword";
 import EditEmail from "./pages/EditEmail";
+import Historico from "./pages/Historico";
 import { AuthContext } from "./helpers/AuthContex";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -77,6 +78,7 @@ function App() {
           <Route path="/detalhes-da-conta" element={<DetalhesConta />} />
           <Route path="/editar-senha" element={<EditPassword />} />
           <Route path="/editar-email" element={<EditEmail />} />
+          <Route path="/historico" element={<Historico />} />
         </Routes>
       </Router>
       </AuthContext.Provider>
