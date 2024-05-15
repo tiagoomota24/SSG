@@ -44,4 +44,16 @@ router.get('/get-scores', async (req, res) => {
   }
 });
 
+router.get('/get-user-scores', validateToken, async (req, res) => {
+  try {
+    const scores = await Score.findAll({
+      where: { UserId: req.user.id },
+    });
+    res.json(scores);
+  } catch (error) {
+    console.error('Erro ao buscar as pontuações do usuário:', error);
+    res.status(500).send('Houve um erro ao buscar as pontuações do usuário. Por favor, tente novamente mais tarde.');
+  }
+});
+
 module.exports = router;
