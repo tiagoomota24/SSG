@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/Quiz.css";
+import { useNavigate } from "react-router-dom";
 
 function Quiz() {
+  const navigate = useNavigate();
+
   const questions = [
     {
       question: "Qual é a capital da França?",
       options: ["Londres", "Paris", "Berlim", "Madrid"],
       correctAnswer: "Paris",
-      points: 10
+      points: 10,
     },
     {
       question: "Qual é o maior planeta do Sistema Solar?",
       options: ["Júpiter", "Terra", "Marte", "Saturno"],
       correctAnswer: "Júpiter",
-      points: 20
+      points: 20,
     },
     {
       question: "Qual é o animal terrestre mais rápido?",
       options: ["Cavalo", "Lebre", "Guepardo", "Elefante"],
       correctAnswer: "Guepardo",
-      points: 30
-    }
+      points: 30,
+    },
   ];
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -29,6 +32,22 @@ function Quiz() {
   const [score, setScore] = useState(0);
   const [timer, setTimer] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para controlar se o usuário está logado
+  const [errorMessage, setErrorMessage] = useState(null); // Estado para controlar a mensagem de erro
+
+  useEffect(() => {
+    // Verifique se o usuário está logado ao montar o componente
+    const checkLoginStatus = () => {
+      const accessToken = localStorage.getItem("accessToken");
+      if (!accessToken) {
+        setIsLoggedIn(false);
+      } else {
+        setIsLoggedIn(true);
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
 
   useEffect(() => {
     let intervalId;
@@ -67,32 +86,53 @@ function Quiz() {
     }
   }, [currentQuestion, questions.length]);
 
-  const [errorMessage, setErrorMessage] = useState(null);
-
-  async function saveScore() {
-    try {
-      const response = await axios.post('http://localhost:3001/score/save-score', {
-        time: timer,
-        score: score,
-      }, {
-        headers: { accessToken: localStorage.getItem('accessToken') },
-      });
-  
-      if (response.data.error) {
-        setErrorMessage('Erro ao salvar a pontuação:' + response.data.error);
-      }else{
-        setErrorMessage('Pontuação salva com sucesso!');
+  useEffect(() => {
+    const saveScore = async () => {
+      if (!isLoggedIn) {
+        // Verifique se o usuário está logado antes de tentar salvar a pontuação
+        setErrorMessage("Faça login para salvar sua pontuação.");
+        return;
       }
-    } catch (error) {
-      setErrorMessage('Erro ao salvar a pontuação:' + error);
-    }
-  }
+      try {
+        const response = await axios.post(
+          "http://localhost:3001/score/save-score",
+          {
+            time: timer,
+            score: score,
+          },
+          {
+            headers: { accessToken: localStorage.getItem("accessToken") },
+          }
+        );
 
-  function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-  }
+        if (response.data.error) {
+          setErrorMessage("Erro ao salvar a pontuação: " + response.data.error);
+        } else {
+          setErrorMessage("");
+        }
+      } catch (error) {
+        setErrorMessage("Erro ao salvar a pontuação: " + error);
+      }
+    };
+
+    if (!isPlaying && currentQuestion === questions.length) {
+      saveScore(); // Salva a pontuação automaticamente quando o quiz for concluído
+    }
+  }, [isPlaying, currentQuestion, questions.length, timer, score, isLoggedIn]);
+
+  const formatTime = (seconds) => {
+    if (seconds < 60) {
+      return `${seconds} segundos`;
+    } else if (seconds < 3600) {
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = seconds % 60;
+      return `${minutes} minuto${minutes !== 1 ? "s" : ""} e ${remainingSeconds} segundo${remainingSeconds !== 1 ? "s" : ""}`;
+    } else {
+      const hours = Math.floor(seconds / 3600);
+      const remainingMinutes = Math.floor((seconds % 3600) / 60);
+      return `${hours} hora${hours !== 1 ? "s" : ""} e ${remainingMinutes} minuto${remainingMinutes !== 1 ? "s" : ""}`;
+    }
+  };
 
   return (
     <div className="quiz-container">
@@ -100,6 +140,18 @@ function Quiz() {
         <div>
           <h2>Quiz de Segurança Boa Sorte!</h2>
           <button onClick={handlePlayClick}>Jogar</button>
+          {!isLoggedIn && (
+            <p>
+              Para guardar a sua pontuação, por favor{" "}
+              <button
+                className="login-button-jogo"
+                onClick={() => navigate("/login")}
+              >
+                Inicie Sessão
+              </button>
+              .
+            </p>
+          )}
         </div>
       )}
       {isPlaying && currentQuestion < questions.length && (
@@ -110,7 +162,9 @@ function Quiz() {
               <li key={index}>
                 <button
                   onClick={() => handleOptionSelect(option)}
-                  className={selectedOption === option ? "selected" : "option-button"}
+                  className={
+                    selectedOption === option ? "selected" : "option-button"
+                  }
                 >
                   {option}
                 </button>
@@ -118,18 +172,24 @@ function Quiz() {
             ))}
           </ul>
           {selectedOption && (
-            <button className="next-button" onClick={handleNextQuestion}>Próxima Pergunta</button>
+            <button className="next-button" onClick={handleNextQuestion}>
+              Próxima Pergunta
+            </button>
           )}
         </div>
       )}
       {!isPlaying && currentQuestion === questions.length && (
         <div>
           <h2>Quiz Concluído!</h2>
-          <p>Pontuação Final: {score} de {questions.reduce((acc, curr) => acc + curr.points, 0)} pontos</p>
-          <p>Tempo: {formatTime(timer)} segundos</p>
+          <p>
+            Pontuação Final: {score} de{" "}
+            {questions.reduce((acc, curr) => acc + curr.points, 0)} pontos
+          </p>
+          <p>Tempo: {formatTime(timer)}</p>
           {errorMessage && <p className="error-message">{errorMessage}</p>}
-          <button className="next-button" onClick={saveScore}>Guardar pontuação</button>
-          <button className="next-button" onClick={handlePlayClick}>Tentar Novamente</button>
+          <button className="next-button" onClick={handlePlayClick}>
+            Tentar Novamente
+          </button>
         </div>
       )}
     </div>
