@@ -22,6 +22,7 @@ function Jogos() {
 
   return (
     <>
+      <br></br>
       <h1>Jogos</h1>
       <div className="jogos-container">
         <div

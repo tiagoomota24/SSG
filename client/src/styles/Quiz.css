@@ -1,106 +1,130 @@
-/* Estilo para o container do quiz */
+/* Contêiner principal do quiz */
 .quiz-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  /* Estilo para o título "Quiz" */
-  h2 {
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 28px;
-    color: #333;
-  }
-  
-  /* Estilo para as perguntas */
-  .question-container {
-    margin-bottom: 20px;
-  }
-  
-  /* Estilo para as opções de resposta */
-  ul {
-    padding: 0;
-    list-style-type: none; /* Remover os pontinhos da lista */
-  }
-  
-  .option-button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 2px solid #000000;
-    border-radius: 5px;
-    background-color: #fff;
-    color: #000000;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .option-button:hover {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  .selected {
-    background-color: #007bff;
-    color: #fff;
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #000000;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    display: block;
-  }
-  
-  /* Estilo para o botão "Próxima Pergunta" */
-  .next-button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    background-color: #28a745;
-    color: #fff;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .next-button:hover {
-    background-color: #218838;
-  }
-  
-  /* Estilo para a mensagem de erro */
-  .error-message {
-    color: #dc3545;
-    font-size: 16px;
-    margin-top: 10px;
-    text-align: center;
-  }
+  background: rgba(255, 255, 255, 0.9); /* Fundo branco semitransparente */
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 50px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
 
-  .login-button-jogo {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: #4CAF50; /* Cor verde claro */
-    padding: 0;
-    margin: 0;
-  }
+/* Estilo dos botões */
+.btn {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+/* Estilo específico para os botões de opção */
+.option-button {
+  background-color: #868686;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 200px;
+  transition: background-color 0.3s ease;
+}
+
+.option-button:hover {
+  background-color: #363636;
+}
+
+/* Estilo para o botão de opção selecionado */
+.option-button.selected {
+  background-color: #363636;
   
-  .login-button-jogo:hover {
-    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
-  }
-  
+}
+
+/* Contêiner de perguntas */
+.question-container {
+  margin: 20px 0;
+}
+
+/* Mensagem de erro */
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Estilo para o botão "Próxima Pergunta" */
+.next-button {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.next-button:hover {
+  background-color: #138496;
+}
+
+/* Estilo para o botão de login */
+.login-button-jogo {
+  background-color: transparent;
+  color: #4CAF50; /* Cor verde claro */
+  padding: 0;
+  margin: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.login-button-jogo:hover {
+  text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+}
+
+/* Parágrafo de introdução */
+.intro-paragraph {
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Estilo para o botão de instruções */
+.instruction-button {
+  background-color: #17a2b8; /* Azul claro */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.instruction-button:hover {
+  background-color: #138496; /* Azul mais escuro */
+}
+
+/* Estilo para o contêiner de instruções */
+.instructions-container {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  display: none; /* Oculto por padrão */
+}
+
+.instructions-container.show {
+  display: block; /* Mostrar quando a classe 'show' for adicionada */
+}

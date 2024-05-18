@@ -34,6 +34,8 @@ function Quiz() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para controlar se o usuário está logado
   const [errorMessage, setErrorMessage] = useState(null); // Estado para controlar a mensagem de erro
+  const [showInstructions, setShowInstructions] = useState(false); // Estado para controlar a exibição das instruções
+
 
   useEffect(() => {
     // Verifique se o usuário está logado ao montar o componente
@@ -78,6 +80,12 @@ function Quiz() {
     setCurrentQuestion(0); // Reset to first question
     setScore(0); // Reset score
     setTimer(0); // Reset timer
+    setShowInstructions(false); // Ocultar instruções ao iniciar o jogo
+
+  };
+
+  const handleShowInstructions = () => {
+    setShowInstructions(!showInstructions);
   };
 
   useEffect(() => {
@@ -139,7 +147,25 @@ function Quiz() {
       {!isPlaying && currentQuestion === 0 && (
         <div>
           <h2>Quiz de Segurança Boa Sorte!</h2>
-          <button onClick={handlePlayClick}>Jogar</button>
+          <p className="intro-paragraph">
+            Neste Quiz vais ter que responder a algumas perguntas sobre segurança digital, cada pergunta tem um valor de pontos associado, sê rápido. Boa Sorte!
+          </p>
+          <button className="btn" onClick={handlePlayClick}>Jogar</button>
+          <button className="instruction-button" onClick={handleShowInstructions}>
+            {showInstructions ? "Ocultar Instruções" : "Mostrar Instruções"}
+          </button>
+          {showInstructions && (
+            <div className="instructions-container show">
+              <h3>Instruções:</h3>
+              <p>1. Leia cada pergunta com atenção.</p>
+              <p>2. Selecione a resposta que você acredita ser correta.</p>
+              <p>3. Clique no botão "Próxima Pergunta" para avançar.</p>
+              <p>4. Sua pontuação será calculada com base nas respostas corretas e no tempo total.</p>
+              <p>5. Faça login para salvar sua pontuação e competir com outros jogadores.</p>
+              <p>Divirta-se e boa sorte!</p>
+              <p><strong>Nota:</strong> Sempre que clicares em "Tentar Novamente", o jogo recomeçará imediatamente. Está atento, todos os segundos contam!</p>
+            </div>
+          )}
           {!isLoggedIn && (
             <p>
               Para guardar a sua pontuação, por favor{" "}
@@ -149,7 +175,6 @@ function Quiz() {
               >
                 Inicie Sessão
               </button>
-              .
             </p>
           )}
         </div>
@@ -162,9 +187,7 @@ function Quiz() {
               <li key={index}>
                 <button
                   onClick={() => handleOptionSelect(option)}
-                  className={
-                    selectedOption === option ? "selected" : "option-button"
-                  }
+                  className={`option-button ${selectedOption === option ? "selected" : ""}`}
                 >
                   {option}
                 </button>

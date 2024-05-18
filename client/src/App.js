@@ -17,6 +17,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import i18n from "./i18n";
+import { I18nextProvider } from 'react-i18next';
+
 
 function App() {
 
@@ -63,6 +66,7 @@ function App() {
 
   return (
     <div className="App">
+    <I18nextProvider i18n={i18n}>
       <AuthContext.Provider value={{authState, setAuthState}}>
       <Router>
       <ToastContainer />
@@ -82,6 +86,7 @@ function App() {
         </Routes>
       </Router>
       </AuthContext.Provider>
+      </I18nextProvider>
     </div>
   );
 }

@@ -49,7 +49,9 @@ function Historico() {
 
   return (
     <div className="container1">
-      <h2>User History</h2>
+      <h2>Histórico</h2>
+      <p className="description">Veja suas pontuações anteriores:</p>
+      {history.length === 0 && <p className="no-results">Sem resultados para mostrar, ainda não jogou.</p>}
       <ul>
         {currentScores.map((entry) => (
           <li key={entry.id}>
