@@ -3,6 +3,11 @@ const router = express.Router();
 const { User } = require("../models");
 const bcrypt = require("bcrypt");
 const { validateToken } = require("../middlewares/AuthMiddleware");
+require("dotenv").config();
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
+const { Op } = require('sequelize');
+
 
 const { sign } = require("jsonwebtoken");
 
@@ -130,6 +135,73 @@ router.put('/changePassword', validateToken, async (req, res) => {
   } catch (error) {
     console.error("Erro ao alterar a senha:", error);
     res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
+router.post("/requestPasswordReset", async (req, res) => {
+  const { email } = req.body;
+  try {
+      const user = await User.findOne({ where: { email: email } });
+      if (!user) {
+          return res.status(404).json({ message: "User not found" });
+      }
+
+      const verificationCode = crypto.randomBytes(3).toString('hex').toUpperCase(); // Generate a 6-character code
+      user.resetPasswordToken = verificationCode;
+      user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+      await user.save();
+
+      const transporter = nodemailer.createTransport({
+          service: 'Gmail',
+          auth: {
+              user: process.env.EMAIL,
+              pass: process.env.EMAIL_PASSWORD,
+          },
+      });
+
+      const mailOptions = {
+          to: user.email,
+          from: process.env.EMAIL,
+          subject: 'Password Reset Verification Code',
+          text: `Your verification code is: ${verificationCode}\n\nThis code will expire in 1 hour.`,
+      };
+
+      await transporter.sendMail(mailOptions);
+
+      res.status(200).json({ message: 'Verification code sent to your email' });
+  } catch (error) {
+      console.error('Error in requestPasswordReset:', error);
+      res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.post("/verifyCodeAndResetPassword", async (req, res) => {
+  const { email, code, newPassword } = req.body;
+
+  try {
+      const user = await User.findOne({
+          where: {
+              email: email,
+              resetPasswordToken: code,
+              resetPasswordExpires: { [Op.gt]: Date.now() },
+          }
+      });
+
+      if (!user) {
+          return res.status(400).json({ message: 'Verification code is invalid or has expired' });
+      }
+
+      user.password = await bcrypt.hash(newPassword, 10);
+      user.resetPasswordToken = null;
+      user.resetPasswordExpires = null;
+
+      await user.save();
+
+      res.status(200).json({ message: 'Password has been reset' });
+  } catch (error) {
+      console.error('Error in verifyCodeAndResetPassword:', error);
+      res.status(500).json({ message: 'Server error' });
   }
 });
 

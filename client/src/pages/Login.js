@@ -60,10 +60,7 @@ function Login() {
             <FaLock className="icon" />
           </div>
           <div className="remember-forgot">
-{/*             <label>
-              <input type="checkbox" /> Lembrar-me
-            </label> */}
-            <a href="/">Esqueceu-se da palavra-passe?</a>
+          <a href="/forgotpassword">Esqueceu-se da palavra-passe?</a> 
           </div>
           <button type="submit">Entrar</button>{" "}
           <div className="register-link">

@@ -20,7 +20,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import i18n from "./i18n";
 import { I18nextProvider } from 'react-i18next';
 import Depoimentos from "./pages/Depoimentos";
-
+import Forgotpassword from "./pages/Forgotpassword";
+import Resetpassword from "./pages/Resetpassword";
 
 function App() {
 
@@ -85,6 +86,8 @@ function App() {
           <Route path="/editar-email" element={<EditEmail />} />
           <Route path="/historico" element={<Historico />} />
           <Route path="/depoimentos" element={<Depoimentos />} />
+          <Route path="/forgotpassword" element={<Forgotpassword />} />
+          <Route path="/resetpassword" element={<Resetpassword />} />
         </Routes>
       </Router>
       </AuthContext.Provider>
