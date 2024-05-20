@@ -7,6 +7,8 @@ const PasswordResetRequest = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const [isSuccess, setIsSuccess] = useState(false);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,15 +16,19 @@ const PasswordResetRequest = () => {
     try {
       const response = await axios.post('http://localhost:3001/auth/requestPasswordReset', { email });
       setMessage(response.data.message);
-      navigate('/resetpassword', { state: { email } }); // Redireciona para a página de inserção do token
+      setTimeout(() => {
+        navigate('/resetpassword', { state: { email } });
+      }, 3000); // 3 segundos de atraso // Redireciona para a página de inserção do token
+      setIsSuccess(true);
     } catch (error) {
       setMessage(error.response ? error.response.data.message : 'Server error');
+      setIsSuccess(false);
     }
   };
 
   return (
     <div className="password-reset-request">
-      <h1>Reset Password</h1>
+      <h1>Recuperar Palavra-passe</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label>
         <input 
@@ -33,9 +39,9 @@ const PasswordResetRequest = () => {
           onChange={(e) => setEmail(e.target.value)} 
           required 
         />
-        <button type="submit">Request Password Reset</button>
+        <button type="submit">Solicitar Redefinição da senha</button>
       </form>
-      {message && <p>{message}</p>}
+      {message && <p className={isSuccess ? "message-success" : "message-error"}>{message}</p>}
     </div>
   );
 };

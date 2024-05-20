@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import '../styles/PasswordReset.css';
 
 const Resetpassword = () => {
@@ -9,6 +10,9 @@ const Resetpassword = () => {
   const [token, setToken] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,8 +24,13 @@ const Resetpassword = () => {
         newPassword,
       });
       setMessage(response.data.message);
+      setTimeout(() => {
+        navigate('/login', { state: { email } });
+      }, 3000);
+      setIsSuccess(true);
     } catch (error) {
       setMessage(error.response ? error.response.data.message : 'Server error');
+      setIsSuccess(false);
     }
   };
 
@@ -49,7 +58,7 @@ const Resetpassword = () => {
         />
         <button type="submit">Reset Password</button>
       </form>
-      {message && <p>{message}</p>}
+      {message && <p className={isSuccess ? "message-success" : "message-error"}>{message}</p>}
     </div>
   );
 };

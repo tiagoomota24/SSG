@@ -164,12 +164,12 @@ router.post("/requestPasswordReset", async (req, res) => {
           to: user.email,
           from: process.env.EMAIL,
           subject: 'Password Reset Verification Code',
-          text: `Your verification code is: ${verificationCode}\n\nThis code will expire in 1 hour.`,
+          text: `O seu código de verificação é: ${verificationCode}\n\nO código expira em 1 hora.`,
       };
 
       await transporter.sendMail(mailOptions);
 
-      res.status(200).json({ message: 'Verification code sent to your email' });
+      res.status(200).json({ message: 'Código de verificação enviado para o seu email' });
   } catch (error) {
       console.error('Error in requestPasswordReset:', error);
       res.status(500).json({ message: 'Server error' });
@@ -189,7 +189,7 @@ router.post("/verifyCodeAndResetPassword", async (req, res) => {
       });
 
       if (!user) {
-          return res.status(400).json({ message: 'Verification code is invalid or has expired' });
+          return res.status(400).json({ message: 'O código de verificação está errado ou expirou' });
       }
 
       user.password = await bcrypt.hash(newPassword, 10);
@@ -198,7 +198,7 @@ router.post("/verifyCodeAndResetPassword", async (req, res) => {
 
       await user.save();
 
-      res.status(200).json({ message: 'Password has been reset' });
+      res.status(200).json({ message: 'Palavra-passe foi alterada' });
   } catch (error) {
       console.error('Error in verifyCodeAndResetPassword:', error);
       res.status(500).json({ message: 'Server error' });
