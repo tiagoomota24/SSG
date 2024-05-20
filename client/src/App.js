@@ -19,6 +19,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import i18n from "./i18n";
 import { I18nextProvider } from 'react-i18next';
+import Depoimentos from "./pages/Depoimentos";
 
 
 function App() {
@@ -83,6 +84,7 @@ function App() {
           <Route path="/editar-senha" element={<EditPassword />} />
           <Route path="/editar-email" element={<EditEmail />} />
           <Route path="/historico" element={<Historico />} />
+          <Route path="/depoimentos" element={<Depoimentos />} />
         </Routes>
       </Router>
       </AuthContext.Provider>

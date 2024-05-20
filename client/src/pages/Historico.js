@@ -47,6 +47,41 @@ function Historico() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const renderPageNumbers = () => {
+    const totalPages = Math.ceil(history.length / scoresPerPage);
+    const pageNumbers = [];
+
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+    } else {
+      if (currentPage <= 4) {
+        for (let i = 1; i <= 6; i++) {
+          pageNumbers.push(i);
+        }
+        pageNumbers.push('...');
+        pageNumbers.push(totalPages);
+      } else if (currentPage > totalPages - 4) {
+        pageNumbers.push(1);
+        pageNumbers.push('...');
+        for (let i = totalPages - 5; i <= totalPages; i++) {
+          pageNumbers.push(i);
+        }
+      } else {
+        pageNumbers.push(1);
+        pageNumbers.push('...');
+        for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+          pageNumbers.push(i);
+        }
+        pageNumbers.push('...');
+        pageNumbers.push(totalPages);
+      }
+    }
+
+    return pageNumbers;
+  };
+
   return (
     <div className="container1">
       <h2>Histórico</h2>
@@ -64,11 +99,36 @@ function Historico() {
       <div className="pagination">
         {history.length > scoresPerPage && (
           <ul>
-            {Array.from({ length: Math.ceil(history.length / scoresPerPage) }, (_, index) => (
+            <li>
+              <button
+                onClick={() => paginate(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                &laquo;
+              </button>
+            </li>
+            {renderPageNumbers().map((number, index) => (
               <li key={index}>
-                <button onClick={() => paginate(index + 1)}>{index + 1}</button>
+                {number === '...' ? (
+                  <span className="dots">...</span>
+                ) : (
+                  <button
+                    onClick={() => paginate(number)}
+                    className={currentPage === number ? 'active' : ''}
+                  >
+                    {number}
+                  </button>
+                )}
               </li>
             ))}
+            <li>
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                disabled={currentPage === Math.ceil(history.length / scoresPerPage)}
+              >
+                &raquo;
+              </button>
+            </li>
           </ul>
         )}
       </div>

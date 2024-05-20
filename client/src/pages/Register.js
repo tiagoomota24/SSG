@@ -101,6 +101,7 @@ function Registration() {
                 <ErrorMessage name="confirmPassword" component="span" />
             </div>
             <button type="submit"> Criar</button>
+            <button onClick={() => navigate("/login")}>Voltar</button>
           </Form>
         </Formik>
       </div>

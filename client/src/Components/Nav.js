@@ -86,18 +86,18 @@ const MyNavbar = ({ onLogout }) => {
                   <NavDropdown.Item as={Link} to="/detalhes-da-conta" onClick={() => handleItemClick('detalhes-da-conta')} className={selectedItem === 'detalhes-da-conta' ? 'active' : ''}>{t('account_details')}</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/historico" onClick={() => handleItemClick('historico')} className={selectedItem === 'historico' ? 'active' : ''}>{t('history')}</NavDropdown.Item>
                 </NavDropdown>
-              <Nav.Link onClick={handleLogout} className="logout-button">
+              <Nav.Link as={Link} to='/' onClick={handleLogout} className="logout-button">
                 <IoIosLogOut className="icon" />
-                {t(' Logout')}
+                {t('logout')}
               </Nav.Link>
             </>
             )}
             <NavDropdown title={language} id="language-dropdown">
-              <NavDropdown.Item onClick={() => handleLanguageChange('PT')} style={{ backgroundColor: '#212529', color: 'white' }}>
+              <NavDropdown.Item onClick={() => handleLanguageChange('PT')}>
                 <img src={ptFlag} alt="Portuguese" width="20" height="20" className="d-inline-block align-top" />{' '}
                 Português
               </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => handleLanguageChange('ENG')} style={{ backgroundColor: '#212529', color: 'white' }}>
+              <NavDropdown.Item onClick={() => handleLanguageChange('ENG')}>
                 <img src={enFlag} alt="English" width="20" height="20" className="d-inline-block align-top" />{' '}
                 English
               </NavDropdown.Item>

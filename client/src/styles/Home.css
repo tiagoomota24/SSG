@@ -1,0 +1,153 @@
+.home-container {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .banner {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    position: relative;
+  }
+  
+  .banner-text {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .cta-button {
+    background-color: #17a2b8;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    display: inline-block;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+    .cta-button:hover {
+        background-color: #138496;
+    }
+  
+  .section {
+    padding: 40px 0;
+    text-align: center;
+  }
+  
+  .games-section {
+    background-color: #f8f9fa;
+  }
+  
+  .games-preview {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .game-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  .game-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .game-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .game-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: inline-block;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+    .game-button:hover {
+        background-color: #218838;
+    }
+  
+  .benefits-section {
+    background-color: #e9ecef;
+  }
+  
+  .benefits-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    display: inline-block;
+  }
+  
+  .benefits-list li {
+    background: #fff;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .testimonials-section {
+    background-color: #f8f9fa;
+  }
+  
+  .testimonials blockquote {
+    background: white;
+    padding: 20px;
+    margin: 10px auto;
+    border-left: 5px solid #007bff;
+    border-radius: 5px;
+    font-style: italic;
+    max-width: 600px;
+  }
+  
+  .news-section {
+    background-color: #e9ecef;
+  }
+  
+  .contact-section {
+    background: #f8f9fa;
+    padding: 40px 20px;
+    border-radius: 10px;
+  }
+  
+  .contact-button {
+    background-color: #17a2b8;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 1em;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+    .contact-button:hover {
+        background-color: #138496;
+    }

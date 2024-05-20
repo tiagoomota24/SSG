@@ -15,7 +15,7 @@ const resources = {
       login: 'Login',
       account_details: 'Account Details',
       history: 'History',
-      logout: 'Logout',
+      logout: ' Logout',
       account: 'Account'
     }
   },
@@ -31,7 +31,7 @@ const resources = {
       login: 'Login',
       account_details: 'Detalhe da Conta',
       history: 'Histórico',
-      logout: 'Terminar-sessão',
+      logout: ' Terminar sessão',
       account: 'Conta'
     }
   }

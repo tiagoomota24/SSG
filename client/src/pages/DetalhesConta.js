@@ -51,7 +51,7 @@ function DetalhesConta() {
               readOnly
             />
             <Link to="/editar-email">
-              <MdEdit className="edit-icon" />
+              <MdEdit className="edit-icon" title="editar-email" />
             </Link>
           </div>
           <div className="input-box">
@@ -72,7 +72,7 @@ function DetalhesConta() {
               readOnly
             />
             <Link to="/editar-senha">
-              <MdEdit className="edit-icon" />
+              <MdEdit className="edit-icon" title="editar-senha" />
             </Link>
           </div>
           <button type="button" onClick={handleLogout}>Sair</button>
