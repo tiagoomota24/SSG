@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const contactRoutes = require('./routes/Contact');
+
 
 app.use(express.json());
 app.use(cors());
@@ -13,6 +15,9 @@ app.use("/auth", userRouter);
 
 const scoreRouter = require("./routes/Score");
 app.use("/score", scoreRouter);
+
+app.use('/contact', contactRoutes);
+
 
 db.sequelize.sync().then(() => {
   app.listen(3001, () => {

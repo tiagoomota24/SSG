@@ -22,6 +22,7 @@ import { I18nextProvider } from 'react-i18next';
 import Depoimentos from "./pages/Depoimentos";
 import Forgotpassword from "./pages/Forgotpassword";
 import Resetpassword from "./pages/Resetpassword";
+import Contact from "./pages/Contact";
 
 function App() {
 
@@ -88,6 +89,7 @@ function App() {
           <Route path="/depoimentos" element={<Depoimentos />} />
           <Route path="/forgotpassword" element={<Forgotpassword />} />
           <Route path="/resetpassword" element={<Resetpassword />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </Router>
       </AuthContext.Provider>

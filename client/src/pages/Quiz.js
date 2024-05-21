@@ -25,6 +25,7 @@ function Quiz() {
       correctAnswer: "Guepardo",
       points: 30,
     },
+    
   ];
 
   const [currentQuestion, setCurrentQuestion] = useState(0);

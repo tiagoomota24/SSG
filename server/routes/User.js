@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
       "importantsecret"
     );
 
-    res.json(accessToken);
+    res.json({ token: accessToken });
   });
 });
 

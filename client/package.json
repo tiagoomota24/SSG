@@ -8,6 +8,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
+    "emailjs": "^4.0.3",
+    "emailjs-com": "^3.2.0",
     "formik": "^2.4.5",
     "i18next": "^23.11.4",
     "i18next-browser-languagedetector": "^8.0.0",
