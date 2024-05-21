@@ -1,0 +1,61 @@
+.footer {
+    background-color: #343a40; /* Cor de fundo escura para o rodapé */
+    padding: 20px 0;
+    color: white; /* Cor do texto do rodapé */
+  }
+  
+  .footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer .row > div {
+    margin-bottom: 20px;
+  }
+  
+  .footer h5 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: white; /* Cor dos títulos do rodapé */
+  }
+  
+  .footer p {
+    margin-bottom: 10px;
+    color: white; /* Cor dos parágrafos do rodapé */
+  }
+  
+  .footer .list-unstyled {
+    padding-left: 0;
+    list-style: none; /* Remove marcadores da lista */
+  }
+  
+  .footer .list-unstyled li {
+    margin-bottom: 10px;
+  }
+  
+  .footer .list-unstyled li a {
+    text-decoration: none;
+    color: #adb5bd; /* Cor dos links do rodapé */
+    background: transparent; /* Remove o fundo branco */
+    display: inline-block; /* Garante que o padding funcione corretamente */
+    padding: 5px 0; /* Adiciona um pequeno padding para os links */
+  }
+  
+  .footer .list-unstyled li a:hover {
+    color: white; /* Cor dos links ao passar o mouse */
+  }
+  
+  .footer .fab {
+    font-size: 18px;
+    color: #adb5bd; /* Cor dos ícones de redes sociais */
+  }
+  
+  .footer .fab:hover {
+    color: white; /* Cor dos ícones ao passar o mouse */
+  }
+  
+  .footer .text-center p {
+    margin: 0;
+    color: #adb5bd; /* Cor do texto de direitos autorais */
+  }
+  

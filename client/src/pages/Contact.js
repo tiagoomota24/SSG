@@ -4,28 +4,23 @@ import '../styles/Contact.css';
 import axios from 'axios';
 
 const Contact = () => {
-  const [name, setName] = useState('');
+  const [name, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
 
   useEffect(() => {
-    // Função para buscar os detalhes do usuário e atualizar o estado
-    const fetchUserDetails = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/auth/userDetails', {
-          headers: { accessToken: localStorage.getItem('accessToken') }
-        });
-        const { name, email } = response.data;
-        setName(name);
-        setEmail(email);
-      } catch (error) {
-        console.error('Erro ao buscar detalhes do usuário:', error);
-      }
-    };
-
-    // Chame a função para buscar os detalhes do usuário ao carregar o componente
-    fetchUserDetails();
+    axios
+      .get("http://localhost:3001/auth/userDetails", {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        setEmail(response.data.email);
+        setUsername(response.data.username);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
   }, []);
 
   const handleSubmit = (e) => {
@@ -52,7 +47,7 @@ const Contact = () => {
           id="name"
           name="from_name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
         <label htmlFor="email">Email:</label>

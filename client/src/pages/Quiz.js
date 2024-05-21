@@ -8,24 +8,39 @@ function Quiz() {
 
   const questions = [
     {
-      question: "Qual é a capital da França?",
-      options: ["Londres", "Paris", "Berlim", "Madrid"],
-      correctAnswer: "Paris",
+      question: "O que é phishing?",
+      options: [
+        "Um método de segurança cibernética",
+        "Uma técnica de obtenção fraudulenta de informações",
+        "Uma forma de encriptação de dados",
+        "Um tipo de firewall"
+      ],
+      correctAnswer: "Uma técnica de obtenção fraudulenta de informações",
       points: 10,
     },
     {
-      question: "Qual é o maior planeta do Sistema Solar?",
-      options: ["Júpiter", "Terra", "Marte", "Saturno"],
-      correctAnswer: "Júpiter",
+      question: "Qual das seguintes opções é um sinal de phishing?",
+      options: [
+        "Erros de ortografia e gramática",
+        "Endereços de e-mail ou URLs estranhos",
+        "Solicitações de informações pessoais ou financeiras",
+        "Todas as anteriores"
+      ],
+      correctAnswer: "Todas as anteriores",
       points: 20,
     },
     {
-      question: "Qual é o animal terrestre mais rápido?",
-      options: ["Cavalo", "Lebre", "Guepardo", "Elefante"],
-      correctAnswer: "Guepardo",
+      question: "Como os 'phishers' costumam se passar por empresas legítimas?",
+      options: [
+        "Usando anúncios online",
+        "Enviando e-mails ou mensagens pop-up",
+        "Criando sites de compras",
+        "Usando redes sociais"
+      ],
+      correctAnswer: "Enviando e-mails ou mensagens pop-up",
       points: 30,
-    },
-    
+    }
+
   ];
 
   const [currentQuestion, setCurrentQuestion] = useState(0);

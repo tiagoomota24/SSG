@@ -23,6 +23,7 @@ import Depoimentos from "./pages/Depoimentos";
 import Forgotpassword from "./pages/Forgotpassword";
 import Resetpassword from "./pages/Resetpassword";
 import Contact from "./pages/Contact";
+import Footer from "./Components/Footer";
 
 function App() {
 
@@ -91,6 +92,7 @@ function App() {
           <Route path="/resetpassword" element={<Resetpassword />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
+        <Footer />
       </Router>
       </AuthContext.Provider>
       </I18nextProvider>
