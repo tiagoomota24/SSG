@@ -80,9 +80,9 @@ const Homepage = ({ testimonials }) => {
             "Os jogos são incríveis e educativos. Recomendo para todos!" - Maria
           </blockquote>
         </div>
-        <Link to="/depoimentos" className="cta-button">
+{/*         <Link to="/depoimentos" className="cta-button">
           Faça o seu depoimento
-        </Link>
+        </Link> */}
       </div>
       <div className="section">
         <h2>Últimas Notícias</h2>

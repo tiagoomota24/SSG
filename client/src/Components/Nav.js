@@ -36,7 +36,7 @@ const MyNavbar = ({ onLogout }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
-    setAuthState(false);
+    setAuthState({ status: false, isAdmin: false });
   };
 
   const handleLanguageChange = (lang) => {
@@ -64,8 +64,8 @@ const MyNavbar = ({ onLogout }) => {
             <Nav.Link as={Link} to="/tabela_de_classificacao" onClick={() => handleItemClick('tabela_de_classificacao')} className={selectedItem === 'tabela_de_classificacao' ? 'active' : ''}>{t('leaderboard')}</Nav.Link>
             <NavDropdown title={t('digital_security')} id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/phishing" onClick={() => handleItemClick('phishing')} className={selectedItem === 'phishing' ? 'active' : ''}>{t('phishing')}</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="#" onClick={() => handleItemClick('malware')} className={selectedItem === 'malware' ? 'active' : ''}>{t('malware')}</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="#" onClick={() => handleItemClick('ransomware')} className={selectedItem === 'ransomware' ? 'active' : ''}>{t('ransomware')}</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/malware" onClick={() => handleItemClick('malware')} className={selectedItem === 'malware' ? 'active' : ''}>{t('malware')}</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/ransomware" onClick={() => handleItemClick('ransomware')} className={selectedItem === 'ransomware' ? 'active' : ''}>{t('ransomware')}</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>
@@ -85,6 +85,10 @@ const MyNavbar = ({ onLogout }) => {
                 <NavDropdown title={<><MdAccountCircle className="icon" /> {t('account')} </>} id="basic-nav-dropdown">
                   <NavDropdown.Item as={Link} to="/detalhes-da-conta" onClick={() => handleItemClick('detalhes-da-conta')} className={selectedItem === 'detalhes-da-conta' ? 'active' : ''}>{t('account_details')}</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/historico" onClick={() => handleItemClick('historico')} className={selectedItem === 'historico' ? 'active' : ''}>{t('history')}</NavDropdown.Item>
+                  <NavDropdown.Divider />                  
+                  {authState.isAdmin && (
+                  <NavDropdown.Item href="/admin">{t('adminPanel')}</NavDropdown.Item> // Adiciona o link para administração
+                )}
                 </NavDropdown>
               <Nav.Link as={Link} to='/' onClick={handleLogout} className="logout-button">
                 <IoIosLogOut className="icon" />

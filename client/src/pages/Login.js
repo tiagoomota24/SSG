@@ -22,7 +22,10 @@ function Login() {
       alert(response.data.error);
       }else{
         localStorage.setItem("accessToken", response.data.token);
-        setAuthState({status: true});
+        setAuthState({
+          status: true,
+          isAdmin: response.data.isAdmin 
+        });
         navigate("/");
       }
     });

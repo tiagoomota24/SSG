@@ -3,10 +3,8 @@ import "../styles/Phishing.css";
 import beSafe from "../assets/beSafe.png";
 import { AuthContext } from "../helpers/AuthContex";
 import axios from "axios";
-import { useTranslation } from "react-i18next";
 
-function Phishing() {
-  const { t } = useTranslation();
+function Ransomware() {
   const [isHowItWorksExpanded, setIsHowItWorksExpanded] = useState(false);
   const [isHowToIdentifyExpanded, setIsHowToIdentifyExpanded] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -19,7 +17,7 @@ function Phishing() {
   const { authState } = useContext(AuthContext);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/phishing/phishingContent/1").then((response) => {
+    axios.get("http://localhost:3001/phishing/phishingContent/3").then((response) => {
       setContent(response.data);
     }).catch((error) => {
       console.error("Error fetching content:", error);
@@ -43,7 +41,7 @@ function Phishing() {
   };
 
   const handleSave = () => {
-    axios.post("http://localhost:3001/phishing/phishingContent/1", content, {
+    axios.post("http://localhost:3001/phishing/phishingContent/3", content, {
       headers: { accessToken: localStorage.getItem("accessToken") },
     }).then((response) => {
       setEditMode(false);
@@ -55,39 +53,39 @@ function Phishing() {
 
   return (
     <div className="phishing-container">
-      <h1> PHISHING</h1>
+      <h1> RANSOMWARE</h1>
       <div className="intro">
         <img src={beSafe} alt="beSafe" className="beSafe" />
         {editMode ? (
           <textarea name="intro" value={content.intro} onChange={handleInputChange} />
         ) : (
-          <p>{t('introId')}</p>
+          <p>{content.intro}</p>
         )}
       </div>
       <div className="expanding-container">
         <h1 onClick={toggleHowItWorks} data-symbol={isHowItWorksExpanded ? "-" : "+"}>
-        {t('howItWorks')}
+          Como funciona o Ransomware?
         </h1>
         {isHowItWorksExpanded && (
           <div>
             {editMode ? (
               <textarea name="howItWorks" value={content.howItWorks} onChange={handleInputChange} />
             ) : (
-              <p>{t('howItWorksId')}</p>
+              <p>{content.howItWorks}</p>
             )}
           </div>
         )}
       </div>
       <div className="expanding-container">
         <h1 onClick={toggleHowToIdentify} data-symbol={isHowToIdentifyExpanded ? "-" : "+"}>
-        {t('howToIdentify')}
+          Como identificar o Ransomware?
         </h1>
         {isHowToIdentifyExpanded && (
           <div>
             {editMode ? (
               <textarea name="howToIdentify" value={content.howToIdentify} onChange={handleInputChange} />
             ) : (
-              <p>{t('howToIdentifyId')}</p>
+              <p>{content.howToIdentify}</p>
             )}
           </div>
         )}
@@ -105,4 +103,4 @@ function Phishing() {
   );
 }
 
-export default Phishing;
+export default Ransomware;

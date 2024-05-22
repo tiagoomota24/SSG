@@ -5,6 +5,10 @@ module.exports = function (sequelize, DataTypes) {
     email: DataTypes.STRING,
     resetPasswordToken: DataTypes.STRING,
     resetPasswordExpires: DataTypes.DATE,
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   });
 
   User.associate = (models) => {

@@ -24,16 +24,20 @@ import Forgotpassword from "./pages/Forgotpassword";
 import Resetpassword from "./pages/Resetpassword";
 import Contact from "./pages/Contact";
 import Footer from "./Components/Footer";
+import AdminPage from "./pages/AdminPage";
+import Malware from "./pages/Malware";
+import Ransomware from "./pages/Ransomware";
 
 function App() {
 
   const [authState, setAuthState] = useState({
     status: !!localStorage.getItem("accessToken"),
+    isAdmin: false
   });
   
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
-      setAuthState({ status: false });
+      setAuthState({ status: false , isAdmin: false});
     }
   }, []);
 
@@ -45,7 +49,13 @@ function App() {
         })
         .then((response) => {
           if (response.data.error) {
-            setAuthState({ status: false });
+            setAuthState({ status: false, isAdmin: false });
+          }
+          else{
+            setAuthState({
+              status: true,
+              isAdmin: response.data.isAdmin
+            });
           }
         })
         .catch((error) => {
@@ -57,7 +67,7 @@ function App() {
   useEffect(() => {
     const handleStorageChange = (e) => {
       if (e.key === "accessToken" && !e.newValue) {
-        setAuthState({ status: false });
+        setAuthState({ status: false, isAdmin: false});
       }
     };
   
@@ -80,6 +90,8 @@ function App() {
           <Route path="/login" element={localStorage.getItem("accessToken") ? <Homepage /> : <Login />} />
           <Route path="/register" element={localStorage.getItem("accessToken") ? <Homepage /> : <Register />} />
           <Route path="/phishing" element={<Phishing />} />
+          <Route path="/malware" element={<Malware />} />
+          <Route path="/ransomware" element={<Ransomware />} />
           <Route path="/jogos" element={<Jogos />} />
           <Route path="/tabela_de_classificacao" element={<Classificacao />} /> 
           <Route path="/quiz" element={<Quiz />} />
@@ -91,6 +103,7 @@ function App() {
           <Route path="/forgotpassword" element={<Forgotpassword />} />
           <Route path="/resetpassword" element={<Resetpassword />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={authState.isAdmin ? <AdminPage /> : <Homepage />} />
         </Routes>
         <Footer />
       </Router>

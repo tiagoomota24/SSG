@@ -3,7 +3,7 @@
 /* Estilo para o container */
 .classificacao-container {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 40px auto;
     padding: 20px;
   }
   
@@ -21,6 +21,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
+    margin: 90px auto;
   }
   
   /* Estilo para as células da tabela */

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function Quiz() {
   const navigate = useNavigate();
 
-  const questions = [
+  const questionsData = [
     {
       question: "O que é phishing?",
       options: [
@@ -39,10 +39,87 @@ function Quiz() {
       ],
       correctAnswer: "Enviando e-mails ou mensagens pop-up",
       points: 30,
+    },
+    {
+      question: "O que é malware?",
+      options: [
+        "Um software de segurança",
+        "Um software malicioso",
+        "Uma técnica de phishing",
+        "Um tipo de firewall"
+      ],
+      correctAnswer: "Um software malicioso",
+      points: 10,
+    },
+    {
+      question: "Qual das seguintes opções NÃO é um tipo de malware?",
+      options: [
+        "Vírus",
+        "Worm",
+        "Firewall",
+        "Trojan"
+      ],
+      correctAnswer: "Firewall",
+      points: 20,
+    },
+    {
+      question: "Como o malware pode ser distribuído?",
+      options: [
+        "E-mails de phishing",
+        "Downloads de software infectado",
+        "Anexos de e-mail maliciosos",
+        "Todas as anteriores"
+      ],
+      correctAnswer: "Todas as anteriores",
+      points: 30,
+    },
+    {
+      question: "Qual é um sinal comum de infecção por malware?",
+      options: [
+        "Desempenho lento do computador",
+        "Aparecimento de pop-ups intrusivos",
+        "Programas iniciando automaticamente",
+        "Todas as anteriores"
+      ],
+      correctAnswer: "Todas as anteriores",
+      points: 10,
+    },
+    {
+      question: "O que é ransomware?",
+      options: [
+        "Um tipo de software antivírus",
+        "Um software que rouba informações",
+        "Um malware que criptografa dados e exige resgate",
+        "Um programa de firewall"
+      ],
+      correctAnswer: "Um malware que criptografa dados e exige resgate",
+      points: 20,
+    },
+    {
+      question: "Como o ransomware geralmente entra em um sistema?",
+      options: [
+        "Através de e-mails de phishing",
+        "Por meio de downloads de software infectado",
+        "Por meio de anexos de e-mail maliciosos",
+        "Todas as anteriores"
+      ],
+      correctAnswer: "Todas as anteriores",
+      points: 30,
+    },
+    {
+      question: "Qual das seguintes medidas pode ajudar a proteger contra ransomware?",
+      options: [
+        "Manter o software atualizado",
+        "Ter um bom programa antivírus instalado",
+        "Evitar clicar em links ou baixar anexos de e-mails desconhecidos",
+        "Todas as anteriores"
+      ],
+      correctAnswer: "Todas as anteriores",
+      points: 10,
     }
-
   ];
 
+  const [questions, setQuestions] = useState(questionsData);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState("");
   const [score, setScore] = useState(0);
@@ -77,6 +154,10 @@ function Quiz() {
     return () => clearInterval(intervalId);
   }, [isPlaying]);
 
+  const shuffleArray = (array) => {
+    return array.sort(() => Math.random() - 0.5);
+  };
+
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
   };
@@ -97,8 +178,17 @@ function Quiz() {
     setScore(0); // Reset score
     setTimer(0); // Reset timer
     setShowInstructions(false); // Ocultar instruções ao iniciar o jogo
+    
+    const shuffledQuestions = questionsData.map((question) => {
+      return {
+        ...question,
+        options: shuffleArray([...question.options]), // Embaralhe as opções de resposta
+      };
+    });
 
+    setQuestions(shuffledQuestions);
   };
+  
 
   const handleShowInstructions = () => {
     setShowInstructions(!showInstructions);

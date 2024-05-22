@@ -18,6 +18,9 @@ app.use("/score", scoreRouter);
 
 app.use('/contact', contactRoutes);
 
+const phishingRouter = require("./routes/Phishing");
+app.use("/phishing", phishingRouter);
+
 
 db.sequelize.sync().then(() => {
   app.listen(3001, () => {

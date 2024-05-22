@@ -55,11 +55,11 @@ router.post("/login", async (req, res) => {
     }
 
     const accessToken = sign(
-      { username: user.username, id: user.id },
+      { username: user.username, id: user.id, isAdmin: user.isAdmin},
       "importantsecret"
     );
 
-    res.json({ token: accessToken });
+    res.json({ token: accessToken, isAdmin: user.isAdmin });
   });
 });
 
@@ -202,6 +202,50 @@ router.post("/verifyCodeAndResetPassword", async (req, res) => {
   } catch (error) {
       console.error('Error in verifyCodeAndResetPassword:', error);
       res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.get("/users", validateToken, async (req, res) => {
+  try {
+    const users = await User.findAll({
+      attributes: { exclude: ['password'] } // Excluir o campo de senha da resposta
+    });
+    res.json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({ error: "Erro ao obter lista de usuários" });
+  }
+});
+
+router.delete("/users/:id", validateToken, async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const result = await User.destroy({ where: { id: userId } });
+    if (result) {
+      res.json({ message: "Usuário deletado com sucesso" });
+    } else {
+      res.status(404).json({ error: "Usuário não encontrado" });
+    }
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res.status(500).json({ error: "Erro ao deletar usuário" });
+  }
+});
+
+router.put("/users/:id/makeAdmin", validateToken, async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ error: "Usuário não encontrado" });
+    }
+
+    user.isAdmin = true;
+    await user.save();
+    res.json({ message: "Usuário promovido a administrador" });
+  } catch (error) {
+    console.error("Error making user admin:", error);
+    res.status(500).json({ error: "Erro ao promover usuário" });
   }
 });
 

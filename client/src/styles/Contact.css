@@ -1,7 +1,10 @@
 .contact-page {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 1em;
+  max-width: 800px;
+  margin: 110px auto;
+  padding: 1em;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
   }
   
   .contact-page h1 {
@@ -30,14 +33,15 @@
   .contact-page button {
     padding: 0.7em;
     border: none;
-    background-color: #007BFF;
+    background-color: #17a2b8;
     color: white;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
   .contact-page button:hover {
-    background-color: #0056b3;
+    background-color: #138496;
   }
   
   .contact-page p {

@@ -10,7 +10,7 @@ body {
 /* Contêiner principal */
 .container1 {
   max-width: 800px;
-  margin: 50px auto;
+  margin: 110px auto;
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
