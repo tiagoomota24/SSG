@@ -26,26 +26,28 @@ function Registration() {
     confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Palavra-passe deve corresponder').required('Confirmar a palavra-passe!'),
   });
    
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    try {
+      const usernameResponse = await axios.post("http://localhost:3001/auth/checkUsername", { username: data.username });
+      if (usernameResponse.data.exists) {
+        toast.error("Nome de utilizador já existe!");
+        return;
+      }
 
-    axios.post("http://localhost:3001/auth/checkUsername", { username: data.username })
-      .then((response) => {
-        if (response.data.exists) {
-          toast.error("Nome de utilizador já existe!");
-        } else {
-          axios.post("http://localhost:3001/auth/checkEmail", { email: data.email })
-            .then((response) => {
-              if (response.data.exists) {
-                toast.error("Email já está em uso!");
-              } else {
-                axios.post("http://localhost:3001/auth", data).then((response) => {
-                  toast.success('Conta criada com sucesso!');
-                  navigate("/login");
-                });
-              }
-            });
-        }
-      });
+      const emailResponse = await axios.post("http://localhost:3001/auth/checkEmail", { email: data.email });
+      if (emailResponse.data.exists) {
+        toast.error("Email já está em uso!");
+        return;
+      }
+
+      await axios.post("http://localhost:3001/auth", data);
+      toast.success('Conta criada com sucesso! Verifique seu e-mail para ativar a conta.');
+
+      await axios.post("http://localhost:3001/auth/sendActivationEmail", { email: data.email });
+      navigate("/activation");
+    } catch (error) {
+      toast.error('Erro ao criar conta!');
+    }
   };
 
   return (

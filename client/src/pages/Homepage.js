@@ -47,7 +47,7 @@ const Homepage = ({ testimonials }) => {
           <div className="game-card">
             <img src={Quizz} alt="Quiz Game" className="game-image" />
             <h3>Quiz de Segurança</h3>
-            <p>Teste seu conhecimento em segurança digital!</p>
+            <p>Testa o teu conhecimento em segurança digital!</p>
             <Link to="/quiz" className="game-button">
               Jogar
             </Link>
@@ -67,14 +67,14 @@ const Homepage = ({ testimonials }) => {
         <ul className="benefits-list">
           <li>Aprenda segurança digital de forma divertida e interativa.</li>
           <li>Desafie-se com jogos envolventes.</li>
-          <li>Melhore suas habilidades e conhecimento em segurança.</li>
+          <li>Melhore as suas habilidades e conhecimento em segurança.</li>
         </ul>
       </div>
       <div className="section">
         <h2>Depoimentos</h2>
         <div className="testimonials">
         <blockquote>
-            "Esta plataforma me ajudou a entender melhor a segurança digital de uma maneira divertida e envolvente!" - João
+            "Esta plataforma ajudou-me a entender melhor a segurança digital de uma maneira divertida!" - João
           </blockquote>
           <blockquote>
             "Os jogos são incríveis e educativos. Recomendo para todos!" - Maria

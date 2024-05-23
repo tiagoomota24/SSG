@@ -45,22 +45,32 @@ router.post("/", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const user = await User.findOne({ where: { username: username } });
-  if (!user) {
-    return res.json({ error: "Utilizador não encontrado!" });
-  }
-  bcrypt.compare(password, user.password).then((match) => {
+
+  try {
+    const user = await User.findOne({ where: { username } });
+    if (!user) {
+      return res.status(400).json({ error: "Utilizador não encontrado!" });
+    }
+
+    const match = await bcrypt.compare(password, user.password);
     if (!match) {
-      return res.json({ error: "Utilizador ou palavra-passe incorreta!" });
+      return res.status(400).json({ error: "Utilizador ou palavra-passe incorreta!" });
+    }
+
+    if (!user.isActivated) {
+      return res.status(400).json({ error: "A conta não foi ativada!" });
     }
 
     const accessToken = sign(
-      { username: user.username, id: user.id, isAdmin: user.isAdmin},
+      { username: user.username, id: user.id, isAdmin: user.isAdmin },
       "importantsecret"
     );
 
     res.json({ token: accessToken, isAdmin: user.isAdmin });
-  });
+  } catch (error) {
+    console.error("Erro ao fazer login:", error);
+    res.status(500).json({ error: "Erro no servidor" });
+  }
 });
 
 router.get("/auth", validateToken, (req, res) => {

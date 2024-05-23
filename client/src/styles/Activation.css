@@ -1,0 +1,74 @@
+.activation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+  }
+  
+  .activation h1 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .activation form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+  }
+  
+  .activation form div {
+    margin-bottom: 15px;
+  }
+  
+  .activation label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .activation input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .activation button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .activation button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .activation .error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .activation .message-success {
+    color: #28a745;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  .activation .message-error {
+    color: #e74c3c;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  

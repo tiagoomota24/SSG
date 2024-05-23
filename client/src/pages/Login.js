@@ -11,24 +11,33 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { setAuthState } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState("");
+
 
   const navigate = useNavigate(); // Create a navigate object
 
 
-  const login = () => {
-    const data = { username: username, password: password };
-    axios.post("http://localhost:3001/auth/login", data).then((response) => {
+  const login = async () => {
+    const data = { username, password };
+    try {
+      const response = await axios.post("http://localhost:3001/auth/login", data);
       if (response.data.error) {
-      alert(response.data.error);
-      }else{
+        setErrorMessage(response.data.error);
+      } else {
         localStorage.setItem("accessToken", response.data.token);
         setAuthState({
           status: true,
-          isAdmin: response.data.isAdmin 
+          isAdmin: response.data.isAdmin
         });
         navigate("/");
       }
-    });
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.error) {
+        setErrorMessage(error.response.data.error);
+      } else {
+        setErrorMessage('Erro no servidor. Por favor, tente novamente mais tarde.');
+      }
+    }
   };
 
   return (
@@ -42,6 +51,7 @@ function Login() {
           }}
         >
           <h2>Bem-vindo ao SSG</h2>
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
           <div className="input-box">
             <label>Utilizador</label>
             <input

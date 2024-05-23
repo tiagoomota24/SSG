@@ -27,6 +27,7 @@ import Footer from "./Components/Footer";
 import AdminPage from "./pages/AdminPage";
 import Malware from "./pages/Malware";
 import Ransomware from "./pages/Ransomware";
+import Activation from "./pages/Activation";
 
 function App() {
 
@@ -104,6 +105,7 @@ function App() {
           <Route path="/resetpassword" element={<Resetpassword />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={authState.isAdmin ? <AdminPage /> : <Homepage />} />
+          <Route path="/activation" element={<Activation />} />
         </Routes>
         <Footer />
       </Router>

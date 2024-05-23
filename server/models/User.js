@@ -5,6 +5,12 @@ module.exports = function (sequelize, DataTypes) {
     email: DataTypes.STRING,
     resetPasswordToken: DataTypes.STRING,
     resetPasswordExpires: DataTypes.DATE,
+    activationToken: DataTypes.STRING,
+    activationExpires: DataTypes.DATE,
+    isActivated: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
     isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
