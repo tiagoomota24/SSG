@@ -287,6 +287,12 @@ router.put("/users/:id/makeAdmin", validateToken, async (req, res) => {
 
 router.post("/sendActivationEmail", async (req, res) => {
   const { email } = req.body;
+
+  console.log(`Recebido pedido de ativação para o e-mail: ${email}`);  // Log de entrada
+
+  console.log('EMAIL:', process.env.EMAIL);
+  console.log('EMAIL_PASSWORD:', process.env.EMAIL_PASSWORD);
+
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
