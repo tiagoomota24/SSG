@@ -3,8 +3,8 @@ const router = express.Router();
 const { User } = require("../models");
 const bcrypt = require("bcrypt");
 const { validateToken } = require("../middlewares/AuthMiddleware");
-require("dotenv").config();
 const nodemailer = require('nodemailer');
+require("dotenv").config();
 const crypto = require('crypto');
 const { Op } = require('sequelize');
 
@@ -189,7 +189,7 @@ router.post("/requestPasswordReset", async (req, res) => {
       await user.save();
 
       const transporter = nodemailer.createTransport({
-          service: 'Gmail',
+          service: 'gmail',
           auth: {
               user: process.env.EMAIL,
               pass: process.env.EMAIL_PASSWORD,
