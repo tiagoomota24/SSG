@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const contactRoutes = require('./routes/Contact');
+require("dotenv").config();
 
 
 app.use(express.json());
@@ -23,7 +24,7 @@ app.use("/phishing", phishingRouter);
 
 
 db.sequelize.sync().then(() => {
-  app.listen(3001, () => {
+  app.listen(process.env.PORT || 3001, () => {
     console.log("Server está a correr na porta 3001");
   });
 });
