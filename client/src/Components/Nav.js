@@ -89,7 +89,7 @@ const MyNavbar = ({ onLogout }) => {
                   <NavDropdown.Item as={Link} to="/historico" onClick={() => handleItemClick('historico')} className={selectedItem === 'historico' ? 'active' : ''}>{t('history')}</NavDropdown.Item>
                   <NavDropdown.Divider />                  
                   {authState.isAdmin && (
-                  <NavDropdown.Item href="/admin">{t('adminPanel')}</NavDropdown.Item> // Adiciona o link para administração
+                  <NavDropdown.Item as={Link} to="/admin">{t('adminPanel')}</NavDropdown.Item> // Adiciona o link para administração
                 )}
                 </NavDropdown>
               <Nav.Link as={Link} to='/' onClick={handleLogout} className="logout-button">
