@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import emailjs from 'emailjs-com'; // Importe o SDK do EmailJS
-import '../styles/Contact.css';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import emailjs from "emailjs-com"; // Importe o SDK do EmailJS
+import "../styles/Contact.css";
+import axios from "axios";
 
 const Contact = () => {
-  const [name, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [responseMessage, setResponseMessage] = useState('');
+  const [name, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [responseMessage, setResponseMessage] = useState("");
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/auth/userDetails", {
+      .get("https://ssg-2rzn.onrender.com/auth/userDetails", {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
@@ -27,14 +27,23 @@ const Contact = () => {
     e.preventDefault();
 
     // Enviar o e-mail usando o SDK do EmailJS
-    emailjs.sendForm('service_jj85nsa', 'template_pii0zyc', e.target, 'O5zVUWMmOiZyO3s4-')
-      .then((result) => {
-        console.log(result.text);
-        setResponseMessage('Sua mensagem foi enviada com sucesso!');
-      }, (error) => {
-        console.error(error.text);
-        setResponseMessage('Erro ao enviar a mensagem. Tente novamente.');
-      });
+    emailjs
+      .sendForm(
+        "service_jj85nsa",
+        "template_pii0zyc",
+        e.target,
+        "O5zVUWMmOiZyO3s4-"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          setResponseMessage("Sua mensagem foi enviada com sucesso!");
+        },
+        (error) => {
+          console.error(error.text);
+          setResponseMessage("Erro ao enviar a mensagem. Tente novamente.");
+        }
+      );
   };
 
   return (

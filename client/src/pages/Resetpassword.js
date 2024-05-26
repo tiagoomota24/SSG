@@ -24,7 +24,7 @@ const Resetpassword = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const response = await axios.post('http://localhost:3001/auth/verifyCodeAndResetPassword', {
+      const response = await axios.post('https://ssg-2rzn.onrender.com/auth/verifyCodeAndResetPassword', {
         email,
         code: values.token,
         newPassword: values.newPassword,

@@ -6,9 +6,7 @@ import "../styles/Login.css"; // Importe o CSS do Login
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-
 function EditEmail() {
-
   const navigate = useNavigate();
 
   const initialValues = {
@@ -27,26 +25,30 @@ function EditEmail() {
 
   const onSubmit = (values, { setSubmitting, setStatus }) => {
     axios
-      .put("http://localhost:3001/auth/changeEmail", values, {
-        headers: { 'accessToken': localStorage.getItem('accessToken') }
+      .put("https://ssg-2rzn.onrender.com/auth/changeEmail", values, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
       })
-      .then(response => {
+      .then((response) => {
         if (response.data.error) {
           setStatus(response.data.error);
         } else {
           setStatus(null);
-          toast.success('Email alterado com sucesso!');
+          toast.success("Email alterado com sucesso!");
         }
       })
-      .catch(error => {
-        if (error.response && error.response.data && error.response.data.error) {
+      .catch((error) => {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
           setStatus(error.response.data.error);
         } else {
-          setStatus('Houve um erro!');
+          setStatus("Houve um erro!");
         }
       })
       .finally(() => {
-          setSubmitting(false);
+        setSubmitting(false);
       });
   };
 
@@ -75,9 +77,12 @@ function EditEmail() {
               <button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Alterado" : "Alterar email"}
               </button>
-              <button type="button" onClick={() => navigate('/detalhes-da-conta')}>
-              Voltar
-            </button>
+              <button
+                type="button"
+                onClick={() => navigate("/detalhes-da-conta")}
+              >
+                Voltar
+              </button>
             </Form>
           )}
         </Formik>

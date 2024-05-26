@@ -15,34 +15,36 @@ function EditUsername() {
   };
 
   const validationSchema = Yup.object({
-    currentUsername: Yup.string()
-      .required("Obrigatório!"),
-    newUsername: Yup.string()
-      .required("Obrigatório!"),
+    currentUsername: Yup.string().required("Obrigatório!"),
+    newUsername: Yup.string().required("Obrigatório!"),
   });
 
   const onSubmit = (values, { setSubmitting, setStatus }) => {
     axios
-      .put("http://localhost:3001/auth/changeUsername", values, {
-        headers: { 'accessToken': localStorage.getItem('accessToken') }
+      .put("https://ssg-2rzn.onrender.com/auth/changeUsername", values, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
       })
-      .then(response => {
+      .then((response) => {
         if (response.data.error) {
           setStatus(response.data.error);
         } else {
           setStatus(null);
-          toast.success('Nome de utilizador alterado com sucesso!');
+          toast.success("Nome de utilizador alterado com sucesso!");
         }
       })
-      .catch(error => {
-        if (error.response && error.response.data && error.response.data.error) {
+      .catch((error) => {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
           setStatus(error.response.data.error);
         } else {
-          setStatus('Houve um erro!');
+          setStatus("Houve um erro!");
         }
       })
       .finally(() => {
-          setSubmitting(false);
+        setSubmitting(false);
       });
   };
 
@@ -71,7 +73,10 @@ function EditUsername() {
               <button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Alterando..." : "Alterar Nome de utilizador"}
               </button>
-              <button type="button" onClick={() => navigate('/detalhes-da-conta')}>
+              <button
+                type="button"
+                onClick={() => navigate("/detalhes-da-conta")}
+              >
                 Voltar
               </button>
             </Form>

@@ -17,7 +17,7 @@ function Ransomware() {
   const { authState } = useContext(AuthContext);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/phishing/phishingContent/3").then((response) => {
+    axios.get("https://ssg-2rzn.onrender.com/phishing/phishingContent/3").then((response) => {
       setContent(response.data);
     }).catch((error) => {
       console.error("Error fetching content:", error);
@@ -41,7 +41,7 @@ function Ransomware() {
   };
 
   const handleSave = () => {
-    axios.post("http://localhost:3001/phishing/phishingContent/3", content, {
+    axios.post("https://ssg-2rzn.onrender.com/phishing/phishingContent/3", content, {
       headers: { accessToken: localStorage.getItem("accessToken") },
     }).then((response) => {
       setEditMode(false);

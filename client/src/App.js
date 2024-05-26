@@ -48,7 +48,7 @@ function App() {
   useEffect(() => {
     if (authState.status) {
       axios
-        .get("http://localhost:3001/auth/auth", {
+        .get("https://ssg-2rzn.onrender.com/auth/auth", {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {

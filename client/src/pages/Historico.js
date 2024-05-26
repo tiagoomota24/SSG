@@ -10,9 +10,12 @@ function Historico() {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/score/get-user-scores", {
-          headers: { accessToken: localStorage.getItem("accessToken") },
-        });
+        const response = await axios.get(
+          "https://ssg-2rzn.onrender.com/score/get-user-scores",
+          {
+            headers: { accessToken: localStorage.getItem("accessToken") },
+          }
+        );
         setHistory(response.data);
       } catch (error) {
         console.error("Error fetching history:", error);
@@ -23,7 +26,13 @@ function Historico() {
   }, []);
 
   const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" };
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
@@ -33,11 +42,15 @@ function Historico() {
     } else if (timeInSeconds < 3600) {
       const minutes = Math.floor(timeInSeconds / 60);
       const remainingSeconds = timeInSeconds % 60;
-      return `${minutes} minuto${minutes > 1 ? "s" : ""} e ${remainingSeconds} segundo${remainingSeconds > 1 ? "s" : ""}`;
+      return `${minutes} minuto${
+        minutes > 1 ? "s" : ""
+      } e ${remainingSeconds} segundo${remainingSeconds > 1 ? "s" : ""}`;
     } else {
       const hours = Math.floor(timeInSeconds / 3600);
       const remainingMinutes = Math.floor((timeInSeconds % 3600) / 60);
-      return `${hours} hora${hours > 1 ? "s" : ""} e ${remainingMinutes} minuto${remainingMinutes > 1 ? "s" : ""}`;
+      return `${hours} hora${
+        hours > 1 ? "s" : ""
+      } e ${remainingMinutes} minuto${remainingMinutes > 1 ? "s" : ""}`;
     }
   };
 
@@ -60,21 +73,21 @@ function Historico() {
         for (let i = 1; i <= 6; i++) {
           pageNumbers.push(i);
         }
-        pageNumbers.push('...');
+        pageNumbers.push("...");
         pageNumbers.push(totalPages);
       } else if (currentPage > totalPages - 4) {
         pageNumbers.push(1);
-        pageNumbers.push('...');
+        pageNumbers.push("...");
         for (let i = totalPages - 5; i <= totalPages; i++) {
           pageNumbers.push(i);
         }
       } else {
         pageNumbers.push(1);
-        pageNumbers.push('...');
+        pageNumbers.push("...");
         for (let i = currentPage - 2; i <= currentPage + 2; i++) {
           pageNumbers.push(i);
         }
-        pageNumbers.push('...');
+        pageNumbers.push("...");
         pageNumbers.push(totalPages);
       }
     }
@@ -86,7 +99,11 @@ function Historico() {
     <div className="container1">
       <h2>Histórico</h2>
       <p className="description">Veja suas pontuações anteriores:</p>
-      {history.length === 0 && <p className="no-results">Sem resultados para mostrar, ainda não jogou.</p>}
+      {history.length === 0 && (
+        <p className="no-results">
+          Sem resultados para mostrar, ainda não jogou.
+        </p>
+      )}
       <ul>
         {currentScores.map((entry) => (
           <li key={entry.id}>
@@ -109,12 +126,12 @@ function Historico() {
             </li>
             {renderPageNumbers().map((number, index) => (
               <li key={index}>
-                {number === '...' ? (
+                {number === "..." ? (
                   <span className="dots">...</span>
                 ) : (
                   <button
                     onClick={() => paginate(number)}
-                    className={currentPage === number ? 'active' : ''}
+                    className={currentPage === number ? "active" : ""}
                   >
                     {number}
                   </button>
@@ -124,7 +141,9 @@ function Historico() {
             <li>
               <button
                 onClick={() => paginate(currentPage + 1)}
-                disabled={currentPage === Math.ceil(history.length / scoresPerPage)}
+                disabled={
+                  currentPage === Math.ceil(history.length / scoresPerPage)
+                }
               >
                 &raquo;
               </button>

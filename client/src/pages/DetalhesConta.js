@@ -4,17 +4,15 @@ import axios from "axios";
 import { MdEdit } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 
-
 function DetalhesConta() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password] = useState("********");
   const navigate = useNavigate();
 
-
   useEffect(() => {
     axios
-      .get("http://localhost:3001/auth/userDetails", {
+      .get("https://ssg-2rzn.onrender.com/auth/userDetails", {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
@@ -33,9 +31,9 @@ function DetalhesConta() {
     );
   };
 
-    const handleLogout = () => {
+  const handleLogout = () => {
     navigate("/");
-    }
+  };
 
   return (
     <div className="page">
@@ -78,7 +76,9 @@ function DetalhesConta() {
               <MdEdit className="edit-icon" title="editar-senha" />
             </Link>
           </div>
-          <button type="button" onClick={handleLogout}>Sair</button>
+          <button type="button" onClick={handleLogout}>
+            Sair
+          </button>
         </form>
       </div>
     </div>

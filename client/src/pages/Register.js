@@ -28,22 +28,22 @@ function Registration() {
    
   const onSubmit = async (data) => {
     try {
-      const usernameResponse = await axios.post("http://localhost:3001/auth/checkUsername", { username: data.username });
+      const usernameResponse = await axios.post("https://ssg-2rzn.onrender.com/auth/checkUsername", { username: data.username });
       if (usernameResponse.data.exists) {
         toast.error("Nome de utilizador já existe!");
         return;
       }
 
-      const emailResponse = await axios.post("http://localhost:3001/auth/checkEmail", { email: data.email });
+      const emailResponse = await axios.post("https://ssg-2rzn.onrender.com/auth/checkEmail", { email: data.email });
       if (emailResponse.data.exists) {
         toast.error("Email já está em uso!");
         return;
       }
 
-      await axios.post("http://localhost:3001/auth", data);
+      await axios.post("https://ssg-2rzn.onrender.com/auth", data);
       toast.success('Conta criada com sucesso! Verifique seu e-mail para ativar a conta.');
 
-      await axios.post("http://localhost:3001/auth/sendActivationEmail", { email: data.email });
+      await axios.post("https://ssg-2rzn.onrender.com/auth/sendActivationEmail", { email: data.email });
       navigate("/activation");
     } catch (error) {
       toast.error('Erro ao criar conta!');

@@ -274,7 +274,7 @@ function Quiz() {
       }
       try {
         const response = await axios.post(
-          "http://localhost:3001/score/save-score",
+          "https://ssg-2rzn.onrender.com/score/save-score",
           {
             time: timer,
             score: score,

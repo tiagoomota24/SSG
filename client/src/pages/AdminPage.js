@@ -16,29 +16,35 @@ const AdminPage = () => {
       return;
     }
 
-    axios.get("http://localhost:3001/auth/users", {
-      headers: { accessToken: localStorage.getItem("accessToken") },
-    }).then((response) => {
-      setUsers(response.data);
-    }).catch((error) => {
-      console.error("Error fetching users:", error);
-    });
+    axios
+      .get("https://ssg-2rzn.onrender.com/auth/users", {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching users:", error);
+      });
   }, [authState.isAdmin, navigate]);
 
   const handleDelete = (userId) => {
-    axios.delete(`http://localhost:3001/auth/users/${userId}`, {
-      headers: { accessToken: localStorage.getItem("accessToken") },
-    }).then(() => {
-      setUsers(users.filter(user => user.id !== userId));
-    }).catch((error) => {
-      console.error("Error deleting user:", error);
-    });
+    axios
+      .delete(`https://ssg-2rzn.onrender.com/auth/users/${userId}`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then(() => {
+        setUsers(users.filter((user) => user.id !== userId));
+      })
+      .catch((error) => {
+        console.error("Error deleting user:", error);
+      });
   };
 
   const handleMakeAdmin = (userId) => {
     axios
       .put(
-        `http://localhost:3001/auth/users/${userId}/makeAdmin`,
+        `https://ssg-2rzn.onrender.com/auth/users/${userId}/makeAdmin`,
         {},
         {
           headers: { accessToken: localStorage.getItem("accessToken") },

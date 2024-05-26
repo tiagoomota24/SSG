@@ -17,9 +17,14 @@ function EditPassword() {
 
   const validationSchema = Yup.object({
     currentPassword: Yup.string().required("Obrigatório!"),
-    newPassword: Yup.string().min(8, 'A senha deve ter pelo menos 8 caracteres').max(20, 'A senha deve ter no máximo 20 caracteres')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/,"Deve incluir maiúsculas, minúsculas e números")
-    .required('Obrigatório!'),
+    newPassword: Yup.string()
+      .min(8, "A senha deve ter pelo menos 8 caracteres")
+      .max(20, "A senha deve ter no máximo 20 caracteres")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/,
+        "Deve incluir maiúsculas, minúsculas e números"
+      )
+      .required("Obrigatório!"),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("newPassword"), null], "As senhas não coincidem")
       .required("Obrigatório!"),
@@ -28,7 +33,7 @@ function EditPassword() {
   const onSubmit = (values, { setSubmitting, setStatus }) => {
     axios
       .put(
-        "http://localhost:3001/auth/changePassword",
+        "https://ssg-2rzn.onrender.com/auth/changePassword",
         {
           currentPassword: values.currentPassword,
           newPassword: values.newPassword,
@@ -46,7 +51,11 @@ function EditPassword() {
         }
       })
       .catch((error) => {
-        if (error.response && error.response.data && error.response.data.error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
           setStatus(error.response.data.error);
         } else {
           setStatus("Houve um erro!");
@@ -87,7 +96,10 @@ function EditPassword() {
               <button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Alterando..." : "Alterar senha"}
               </button>
-              <button type="button" onClick={() => navigate("/detalhes-da-conta")}>
+              <button
+                type="button"
+                onClick={() => navigate("/detalhes-da-conta")}
+              >
                 Voltar
               </button>
             </Form>

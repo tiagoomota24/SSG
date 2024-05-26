@@ -17,11 +17,14 @@ function Ddos() {
   const { authState } = useContext(AuthContext);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/phishing/phishingContent/5").then((response) => {
-      setContent(response.data);
-    }).catch((error) => {
-      console.error("Error fetching content:", error);
-    });
+    axios
+      .get("https://ssg-2rzn.onrender.com/phishing/phishingContent/5")
+      .then((response) => {
+        setContent(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching content:", error);
+      });
   }, []);
 
   const toggleHowItWorks = () => {
@@ -41,14 +44,21 @@ function Ddos() {
   };
 
   const handleSave = () => {
-    axios.post("http://localhost:3001/phishing/phishingContent/5", content, {
-      headers: { accessToken: localStorage.getItem("accessToken") },
-    }).then((response) => {
-      setEditMode(false);
-      alert("Conteudo foi guardado com sucesso!");
-    }).catch((error) => {
-      console.error("Error saving content:", error);
-    });
+    axios
+      .post(
+        "https://ssg-2rzn.onrender.com/phishing/phishingContent/5",
+        content,
+        {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        }
+      )
+      .then((response) => {
+        setEditMode(false);
+        alert("Conteudo foi guardado com sucesso!");
+      })
+      .catch((error) => {
+        console.error("Error saving content:", error);
+      });
   };
 
   return (
@@ -57,19 +67,30 @@ function Ddos() {
       <div className="intro">
         <img src={beSafe} alt="beSafe" className="beSafe" />
         {editMode ? (
-          <textarea name="intro" value={content.intro} onChange={handleInputChange} />
+          <textarea
+            name="intro"
+            value={content.intro}
+            onChange={handleInputChange}
+          />
         ) : (
           <p>{content.intro}</p>
         )}
       </div>
       <div className="expanding-container">
-        <h1 onClick={toggleHowItWorks} data-symbol={isHowItWorksExpanded ? "-" : "+"}>
+        <h1
+          onClick={toggleHowItWorks}
+          data-symbol={isHowItWorksExpanded ? "-" : "+"}
+        >
           Como funciona o DDOS?
         </h1>
         {isHowItWorksExpanded && (
           <div>
             {editMode ? (
-              <textarea name="howItWorks" value={content.howItWorks} onChange={handleInputChange} />
+              <textarea
+                name="howItWorks"
+                value={content.howItWorks}
+                onChange={handleInputChange}
+              />
             ) : (
               <p>{content.howItWorks}</p>
             )}
@@ -77,13 +98,20 @@ function Ddos() {
         )}
       </div>
       <div className="expanding-container">
-        <h1 onClick={toggleHowToIdentify} data-symbol={isHowToIdentifyExpanded ? "-" : "+"}>
+        <h1
+          onClick={toggleHowToIdentify}
+          data-symbol={isHowToIdentifyExpanded ? "-" : "+"}
+        >
           Como identificar o DDOS?
         </h1>
         {isHowToIdentifyExpanded && (
           <div>
             {editMode ? (
-              <textarea name="howToIdentify" value={content.howToIdentify} onChange={handleInputChange} />
+              <textarea
+                name="howToIdentify"
+                value={content.howToIdentify}
+                onChange={handleInputChange}
+              />
             ) : (
               <p>{content.howToIdentify}</p>
             )}
@@ -93,9 +121,13 @@ function Ddos() {
       {authState.isAdmin && (
         <div className="admin-controls">
           {editMode ? (
-            <button className="save-button" onClick={handleSave}>Guardar</button>
+            <button className="save-button" onClick={handleSave}>
+              Guardar
+            </button>
           ) : (
-            <button className="edit-button" onClick={() => setEditMode(true)}>Editar</button>
+            <button className="edit-button" onClick={() => setEditMode(true)}>
+              Editar
+            </button>
           )}
         </div>
       )}

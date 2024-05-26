@@ -19,7 +19,8 @@ function Phishing() {
   const { authState } = useContext(AuthContext);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/phishing/phishingContent/1")
+    axios
+      .get("https://ssg-2rzn.onrender.com/phishing/phishingContent/1")
       .then((response) => {
         setContent(response.data);
       })
@@ -45,15 +46,22 @@ function Phishing() {
   };
 
   const handleSave = () => {
-    axios.post("http://localhost:3001/phishing/phishingContent/1", content, {
-      headers: { accessToken: localStorage.getItem("accessToken") },
-    }).then((response) => {
-      setEditMode(false);
-      setContent(response.data); // Atualize o estado com o conteúdo salvo
-      alert("Conteudo foi guardado com sucesso!");
-    }).catch((error) => {
-      console.error("Error saving content:", error);
-    });
+    axios
+      .post(
+        "https://ssg-2rzn.onrender.com/phishing/phishingContent/1",
+        content,
+        {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        }
+      )
+      .then((response) => {
+        setEditMode(false);
+        setContent(response.data); // Atualize o estado com o conteúdo salvo
+        alert("Conteudo foi guardado com sucesso!");
+      })
+      .catch((error) => {
+        console.error("Error saving content:", error);
+      });
   };
 
   return (
@@ -62,19 +70,30 @@ function Phishing() {
       <div className="intro">
         <img src={beSafe} alt="beSafe" className="beSafe" />
         {editMode ? (
-          <textarea name="intro" value={content.intro} onChange={handleInputChange} />
+          <textarea
+            name="intro"
+            value={content.intro}
+            onChange={handleInputChange}
+          />
         ) : (
           <p>{content.intro}</p>
         )}
       </div>
       <div className="expanding-container">
-        <h1 onClick={toggleHowItWorks} data-symbol={isHowItWorksExpanded ? "-" : "+"}>
-        {t('howItWorks')}
+        <h1
+          onClick={toggleHowItWorks}
+          data-symbol={isHowItWorksExpanded ? "-" : "+"}
+        >
+          {t("howItWorks")}
         </h1>
         {isHowItWorksExpanded && (
           <div>
             {editMode ? (
-              <textarea name="howItWorks" value={content.howItWorks} onChange={handleInputChange} />
+              <textarea
+                name="howItWorks"
+                value={content.howItWorks}
+                onChange={handleInputChange}
+              />
             ) : (
               <p>{content.howItWorks}</p>
             )}
@@ -82,13 +101,20 @@ function Phishing() {
         )}
       </div>
       <div className="expanding-container">
-        <h1 onClick={toggleHowToIdentify} data-symbol={isHowToIdentifyExpanded ? "-" : "+"}>
-        {t('howToIdentify')}
+        <h1
+          onClick={toggleHowToIdentify}
+          data-symbol={isHowToIdentifyExpanded ? "-" : "+"}
+        >
+          {t("howToIdentify")}
         </h1>
         {isHowToIdentifyExpanded && (
           <div>
             {editMode ? (
-              <textarea name="howToIdentify" value={content.howToIdentify} onChange={handleInputChange} />
+              <textarea
+                name="howToIdentify"
+                value={content.howToIdentify}
+                onChange={handleInputChange}
+              />
             ) : (
               <p>{content.howToIdentify}</p>
             )}
@@ -98,9 +124,13 @@ function Phishing() {
       {authState.isAdmin && (
         <div className="admin-controls">
           {editMode ? (
-            <button className="save-button" onClick={handleSave}>Guardar</button>
+            <button className="save-button" onClick={handleSave}>
+              Guardar
+            </button>
           ) : (
-            <button className="edit-button" onClick={() => setEditMode(true)}>Editar</button>
+            <button className="edit-button" onClick={() => setEditMode(true)}>
+              Editar
+            </button>
           )}
         </div>
       )}
