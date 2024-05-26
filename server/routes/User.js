@@ -290,6 +290,7 @@ router.post("/sendActivationEmail", async (req, res) => {
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
+      console.log("Utilizador não encontrado");  // Log de depuração
       return res.status(404).json({ message: "Utilizador não encontrado" });
     }
 
@@ -298,9 +299,10 @@ router.post("/sendActivationEmail", async (req, res) => {
     user.activationExpires = Date.now() + 3600000; // 1 hora
 
     await user.save();
+    console.log(`Token de ativação gerado: ${activationToken}`);  // Log para verificar se o token está sendo gerado
 
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: 'gmail',  // Corrigido para 'gmail' com 'g' minúsculo
       auth: {
         user: process.env.EMAIL,
         pass: process.env.EMAIL_PASSWORD,
@@ -314,12 +316,18 @@ router.post("/sendActivationEmail", async (req, res) => {
       text: `Seu código de ativação é: ${activationToken}\n\nO código expira em 1 hora.`,
     };
 
-    await transporter.sendMail(mailOptions);
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('Erro ao enviar e-mail:', error);  // Log de erro detalhado
+        return res.status(500).json({ message: 'Erro ao enviar e-mail de ativação', error: error.toString() });
+      }
+      console.log('E-mail enviado:', info.response);  // Log para verificar se o e-mail foi enviado
+      res.status(200).json({ message: 'Código de ativação enviado para seu e-mail' });
+    });
 
-    res.status(200).json({ message: 'Código de ativação enviado para seu e-mail' });
   } catch (error) {
-    console.error('Erro ao enviar e-mail de ativação:', error);
-    res.status(500).json({ message: 'Erro no servidor' });
+    console.error('Erro ao enviar e-mail de ativação:', error);  // Log de erro detalhado
+    res.status(500).json({ message: 'Erro no servidor ao enviar e-mail de ativação', error: error.toString() });
   }
 });
 
