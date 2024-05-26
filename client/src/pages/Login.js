@@ -3,7 +3,7 @@ import axios from "axios";
 import "../styles/Login.css";
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../helpers/AuthContex";
 
 function Login() {
@@ -75,12 +75,12 @@ function Login() {
             <FaLock className="icon" />
           </div>
           <div className="remember-forgot">
-            <a href="/forgotpassword">Esqueceu-se da palavra-passe?</a>
+            <Link to="/forgotpassword">Esqueceu-se da palavra-passe?</Link>
           </div>
           <button type="submit">Entrar</button>{" "}
           <div className="register-link">
             <p>
-              Não tens conta? <a href="/register">Criar Conta</a>{" "}
+              Não tens conta? <Link to ="/register">Criar Conta</Link>{" "}
             </p>
           </div>
         </form>
