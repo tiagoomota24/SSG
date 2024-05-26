@@ -45,7 +45,7 @@ function Ransomware() {
       headers: { accessToken: localStorage.getItem("accessToken") },
     }).then((response) => {
       setEditMode(false);
-      alert("Content saved successfully!");
+      alert("Conteudo foi guardado com sucesso!");
     }).catch((error) => {
       console.error("Error saving content:", error);
     });

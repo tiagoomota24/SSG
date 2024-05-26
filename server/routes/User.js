@@ -148,6 +148,32 @@ router.put('/changePassword', validateToken, async (req, res) => {
   }
 });
 
+router.put('/changeUsername', validateToken, async (req, res) => {
+  const { currentUsername, newUsername } = req.body;
+
+  try {
+    const currentUser = await User.findOne({ where: { id: req.user.id } });
+
+    if (currentUser.username !== currentUsername) {
+      return res.status(400).json({ error: 'O nome de usuário atual não corresponde.' });
+    }
+
+    const usernameExists = await User.findOne({ where: { username: newUsername } });
+
+    if (usernameExists) {
+      return res.status(400).json({ error: 'O nome de usuário já está em uso.' });
+    }
+
+    currentUser.username = newUsername;
+    await currentUser.save();
+
+    res.json({ message: 'Nome de usuário alterado com sucesso.' });
+  } catch (error) {
+    console.error("Erro ao alterar o nome de usuário:", error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
 router.post("/requestPasswordReset", async (req, res) => {
   const { email } = req.body;
   try {
@@ -247,15 +273,81 @@ router.put("/users/:id/makeAdmin", validateToken, async (req, res) => {
   try {
     const user = await User.findByPk(userId);
     if (!user) {
-      return res.status(404).json({ error: "Usuário não encontrado" });
+      return res.status(404).json({ error: "Utilizador não encontrado" });
     }
 
     user.isAdmin = true;
     await user.save();
-    res.json({ message: "Usuário promovido a administrador" });
+    res.json({ message: "Utilizador promovido a administrador" });
   } catch (error) {
     console.error("Error making user admin:", error);
     res.status(500).json({ error: "Erro ao promover usuário" });
+  }
+});
+
+router.post("/sendActivationEmail", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return res.status(404).json({ message: "Utilizador não encontrado" });
+    }
+
+    const activationToken = crypto.randomBytes(3).toString('hex').toUpperCase();
+    user.activationToken = activationToken;
+    user.activationExpires = Date.now() + 3600000; // 1 hora
+
+    await user.save();
+
+    const transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    const mailOptions = {
+      to: user.email,
+      from: process.env.EMAIL,
+      subject: 'Código de Ativação da Conta',
+      text: `Seu código de ativação é: ${activationToken}\n\nO código expira em 1 hora.`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    res.status(200).json({ message: 'Código de ativação enviado para seu e-mail' });
+  } catch (error) {
+    console.error('Erro ao enviar e-mail de ativação:', error);
+    res.status(500).json({ message: 'Erro no servidor' });
+  }
+});
+
+router.post("/activateAccount", async (req, res) => {
+  const { email, activationCode } = req.body;
+  try {
+    const user = await User.findOne({
+      where: {
+        email,
+        activationToken: activationCode,
+        activationExpires: { [Op.gt]: Date.now() },
+      }
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: 'Código de ativação inválido ou expirado' });
+    }
+
+    user.isActivated = true;
+    user.activationToken = null;
+    user.activationExpires = null;
+
+    await user.save();
+
+    res.status(200).json({ message: 'Conta ativada com sucesso' });
+  } catch (error) {
+    console.error('Erro ao ativar conta:', error);
+    res.status(500).json({ message: 'Erro no servidor' });
   }
 });
 

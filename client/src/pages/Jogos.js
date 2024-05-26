@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Quizz from "../assets/quiz.png";
-import Jet from "../assets/jet.png";
+/* import Jet from "../assets/jet.png"; */
 import "../styles/Jogos.css";
 
 function Jogos() {
@@ -45,7 +45,7 @@ function Jogos() {
             </div>
           )}
         </div>
-        <div
+{/*         <div
           onMouseEnter={() => handleMouseEnter("Jet")}
           onMouseLeave={handleMouseLeave}
           className={`jogo-item ${hoveredGame === "Jet" ? "hovered" : ""}`}
@@ -63,7 +63,7 @@ function Jogos() {
               </button>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </>
   );

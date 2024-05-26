@@ -4,7 +4,7 @@ import beSafe from "../assets/beSafe.png";
 import { AuthContext } from "../helpers/AuthContex";
 import axios from "axios";
 
-function Malware() {
+function Ddos() {
   const [isHowItWorksExpanded, setIsHowItWorksExpanded] = useState(false);
   const [isHowToIdentifyExpanded, setIsHowToIdentifyExpanded] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -17,7 +17,7 @@ function Malware() {
   const { authState } = useContext(AuthContext);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/phishing/phishingContent/2").then((response) => {
+    axios.get("http://localhost:3001/phishing/phishingContent/5").then((response) => {
       setContent(response.data);
     }).catch((error) => {
       console.error("Error fetching content:", error);
@@ -41,7 +41,7 @@ function Malware() {
   };
 
   const handleSave = () => {
-    axios.post("http://localhost:3001/phishing/phishingContent/2", content, {
+    axios.post("http://localhost:3001/phishing/phishingContent/5", content, {
       headers: { accessToken: localStorage.getItem("accessToken") },
     }).then((response) => {
       setEditMode(false);
@@ -53,7 +53,7 @@ function Malware() {
 
   return (
     <div className="phishing-container">
-      <h1> MALWARE</h1>
+      <h1> DDOS</h1>
       <div className="intro">
         <img src={beSafe} alt="beSafe" className="beSafe" />
         {editMode ? (
@@ -64,7 +64,7 @@ function Malware() {
       </div>
       <div className="expanding-container">
         <h1 onClick={toggleHowItWorks} data-symbol={isHowItWorksExpanded ? "-" : "+"}>
-          Como funciona o Malware?
+          Como funciona o DDOS?
         </h1>
         {isHowItWorksExpanded && (
           <div>
@@ -78,7 +78,7 @@ function Malware() {
       </div>
       <div className="expanding-container">
         <h1 onClick={toggleHowToIdentify} data-symbol={isHowToIdentifyExpanded ? "-" : "+"}>
-          Como identificar o Malware?
+          Como identificar o DDOS?
         </h1>
         {isHowToIdentifyExpanded && (
           <div>
@@ -103,4 +103,4 @@ function Malware() {
   );
 }
 
-export default Malware;
+export default Ddos;

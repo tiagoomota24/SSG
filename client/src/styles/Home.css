@@ -64,6 +64,11 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
   }
+
+  .alert-message{
+    color: rgb(248, 132, 132);
+    font-size: 1.2em;
+  }
   
   .game-card:hover {
     transform: translateY(-10px);
@@ -125,9 +130,50 @@
     font-style: italic;
     max-width: 600px;
   }
-  
+
   .news-section {
-    background-color: #e9ecef;
+    background-color: #f8f9fa;
+    padding: 40px 0;
+    text-align: center;
+  }
+  
+  .news-preview {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .news-item {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  .news-item:hover {
+    transform: translateY(-10px);
+  }
+  
+  .news-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .news-item h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .news-item p {
+    font-size: 1em;
+    color: #555;
   }
   
   .contact-section {

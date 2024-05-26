@@ -7,6 +7,7 @@ import Jet from "../assets/jet.png";
 const Homepage = ({ testimonials }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     const checkLoginStatus = () => {
@@ -24,7 +25,7 @@ const Homepage = ({ testimonials }) => {
   const handleRegisterClick = (event) => {
     if (isLoggedIn) {
       event.preventDefault();
-      alert("Você já está logado!");
+      setAlertMessage("Já estás logado!");
     } else {
       navigate("/register");
     }
@@ -39,6 +40,7 @@ const Homepage = ({ testimonials }) => {
           <Link to="/register" onClick={handleRegisterClick} className="cta-button">
             Regista-te
           </Link>
+          {alertMessage && <p className="alert-message">{alertMessage}</p>}
         </div>
       </div>
       <div className="section">
@@ -49,14 +51,6 @@ const Homepage = ({ testimonials }) => {
             <h3>Quiz de Segurança</h3>
             <p>Testa o teu conhecimento em segurança digital!</p>
             <Link to="/quiz" className="game-button">
-              Jogar
-            </Link>
-          </div>
-          <div className="game-card">
-            <img src={Jet} alt="Jet Game" className="game-image" />
-            <h3>Jet Adventure</h3>
-            <p>Voe alto e aprenda sobre segurança!</p>
-            <Link to="#" className="game-button">
               Jogar
             </Link>
           </div>
@@ -73,20 +67,23 @@ const Homepage = ({ testimonials }) => {
       <div className="section">
         <h2>Depoimentos</h2>
         <div className="testimonials">
-        <blockquote>
+          <blockquote>
             "Esta plataforma ajudou-me a entender melhor a segurança digital de uma maneira divertida!" - João
           </blockquote>
           <blockquote>
             "Os jogos são incríveis e educativos. Recomendo para todos!" - Maria
           </blockquote>
         </div>
-{/*         <Link to="/depoimentos" className="cta-button">
-          Faça o seu depoimento
-        </Link> */}
       </div>
       <div className="section">
         <h2>Últimas Notícias</h2>
-        <p>Fique atento às nossas últimas atualizações e novos jogos que estão por vir!</p>
+        <div className="news-preview">
+          <div className="news-item">
+            <img src={Jet} alt="Jet Game" className="news-image" />
+            <h3>Jet Adventure - Em breve!</h3>
+            <p>Voe alto e aprenda sobre segurança digital com o nosso novo jogo que está por vir. Fique atento para mais atualizações!</p>
+          </div>
+        </div>
       </div>
       <div className="section contact-section">
         <h2>Contato e Suporte</h2>

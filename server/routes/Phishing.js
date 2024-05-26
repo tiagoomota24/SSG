@@ -18,7 +18,7 @@ router.post("/phishingContent/:id", validateToken, async (req, res) => {
       content.howItWorks = howItWorks;
       content.howToIdentify = howToIdentify;
       await content.save();
-      res.json({ message: "Content saved successfully" });
+      res.json(content);
     } catch (error) {
       console.error("Error saving content:", error);
       res.status(500).json({ error: "Erro ao salvar o conteúdo" });

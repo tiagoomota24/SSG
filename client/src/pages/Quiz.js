@@ -10,7 +10,7 @@ function Quiz() {
     {
       question: "O que é phishing?",
       options: [
-        "Um método de segurança cibernética",
+        "Todas as anteriores",
         "Uma técnica de obtenção fraudulenta de informações",
         "Uma forma de encriptação de dados",
         "Um tipo de firewall"
@@ -32,12 +32,12 @@ function Quiz() {
     {
       question: "Como os 'phishers' costumam se passar por empresas legítimas?",
       options: [
-        "Usando anúncios online",
-        "Enviando e-mails ou mensagens pop-up",
-        "Criando sites de compras",
-        "Usando redes sociais"
+        "Usar anúncios online",
+        "Enviar e-mails ou mensagens pop-up",
+        "Todas as anteriores",
+        "Usar redes sociais"
       ],
-      correctAnswer: "Enviando e-mails ou mensagens pop-up",
+      correctAnswer: "Enviar e-mails ou mensagens pop-up",
       points: 30,
     },
     {
@@ -46,7 +46,7 @@ function Quiz() {
         "Um software de segurança",
         "Um software malicioso",
         "Uma técnica de phishing",
-        "Um tipo de firewall"
+        "Todas as anteriores"
       ],
       correctAnswer: "Um software malicioso",
       points: 10,
@@ -74,11 +74,11 @@ function Quiz() {
       points: 30,
     },
     {
-      question: "Qual é um sinal comum de infecção por malware?",
+      question: "Qual é um sinal comum de infeção por malware?",
       options: [
         "Desempenho lento do computador",
         "Aparecimento de pop-ups intrusivos",
-        "Programas iniciando automaticamente",
+        "Programas que iniciam automaticamente",
         "Todas as anteriores"
       ],
       correctAnswer: "Todas as anteriores",
@@ -99,7 +99,7 @@ function Quiz() {
       question: "Como o ransomware geralmente entra em um sistema?",
       options: [
         "Através de e-mails de phishing",
-        "Por meio de downloads de software infectado",
+        "Por meio de downloads de software infetado",
         "Por meio de anexos de e-mail maliciosos",
         "Todas as anteriores"
       ],
@@ -116,6 +116,72 @@ function Quiz() {
       ],
       correctAnswer: "Todas as anteriores",
       points: 10,
+    },
+    {
+      question: "O que é um ataque DDoS?",
+      options: [
+        "Uma técnica de obtenção fraudulenta de informações",
+        "Um ataque cibernético que usa múltiplos sistemas para inundar um alvo com tráfego",
+        "Um tipo de firewall",
+        "Uma forma de encriptação de dados"
+      ],
+      correctAnswer: "Um ataque cibernético que usa múltiplos sistemas para inundar um alvo com tráfego",
+      points: 10,
+    },
+    {
+      question: "Como os ataques DDoS funcionam?",
+      options: [
+        "Usar anúncios online",
+        "Sobrecarregar o servidor alvo com um volume enorme de tráfego",
+        "Criar sites de compras",
+        "Usar redes sociais"
+      ],
+      correctAnswer: "Sobrecarregar o servidor alvo com um volume enorme de tráfego",
+      points: 20,
+    },
+    {
+      question: "Como identificar um ataque DDoS?",
+      options: [
+        "Aumento súbito e significativo no tráfego de rede",
+        "Erro de ortografia em e-mails",
+        "Pop-ups intrusivos",
+        "Programas iniciando automaticamente"
+      ],
+      correctAnswer: "Aumento súbito e significativo no tráfego de rede",
+      points: 30,
+    },
+    {
+      question: "O que é spyware?",
+      options: [
+        "Um software de segurança",
+        "Um software malicioso que coleta informações sem o conhecimento do utilizador",
+        "Uma técnica de phishing",
+        "Um tipo de firewall"
+      ],
+      correctAnswer: "Um software malicioso que coleta informações sem o conhecimento do utilizador",
+      points: 10,
+    },
+    {
+      question: "Como o spyware geralmente se instala em um sistema?",
+      options: [
+        "Através de downloads de software gratuitos ou anexos de e-mail maliciosos",
+        "Ao criar sites de compras",
+        "Ao usar anúncios online",
+        "Ao usar redes sociais"
+      ],
+      correctAnswer: "Através de downloads de software gratuitos ou anexos de e-mail maliciosos",
+      points: 20,
+    },
+    {
+      question: "Como identificar spyware em seu sistema?",
+      options: [
+        "Desempenho lento do computador",
+        "Mudanças inesperadas nas configurações do navegador",
+        "Anúncios pop-up excessivos",
+        "Todas as anteriores"
+      ],
+      correctAnswer: "Todas as anteriores",
+      points: 30,
     }
   ];
 
@@ -128,7 +194,6 @@ function Quiz() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para controlar se o usuário está logado
   const [errorMessage, setErrorMessage] = useState(null); // Estado para controlar a mensagem de erro
   const [showInstructions, setShowInstructions] = useState(false); // Estado para controlar a exibição das instruções
-
 
   useEffect(() => {
     // Verifique se o usuário está logado ao montar o componente
@@ -288,6 +353,7 @@ function Quiz() {
       {isPlaying && currentQuestion < questions.length && (
         <div className="question-container">
           <h2>{questions[currentQuestion].question}</h2>
+          <p className="question-counter">Pergunta {currentQuestion + 1} de {questions.length}</p>
           <ul>
             {questions[currentQuestion].options.map((option, index) => (
               <li key={index}>

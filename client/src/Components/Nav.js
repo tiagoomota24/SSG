@@ -8,15 +8,15 @@ import { AuthContext } from "../helpers/AuthContex";
 import { IoIosLogOut } from "react-icons/io";
 import { MdAccountCircle } from "react-icons/md";
 import { useTranslation } from "react-i18next";
-import ptFlag from "../assets/ptFlag.png";
-import enFlag from "../assets/engFlag.png";
+/* import ptFlag from "../assets/ptFlag.png";
+import enFlag from "../assets/engFlag.png"; */
 
 const MyNavbar = ({ onLogout }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [selectedItem, setSelectedItem] = useState(null);
   const { authState, setAuthState } = useContext(AuthContext);
   const [isLoggedIn, setIsLoggedIn] = useState(authState.status);
-  const [language, setLanguage] = useState('PT');
+/*   const [language, setLanguage] = useState('PT'); */
 
   useEffect(() => {
     setIsLoggedIn(authState.status);
@@ -39,10 +39,10 @@ const MyNavbar = ({ onLogout }) => {
     setAuthState({ status: false, isAdmin: false });
   };
 
-  const handleLanguageChange = (lang) => {
+/*   const handleLanguageChange = (lang) => {
     setLanguage(lang);
     i18n.changeLanguage(lang.toLowerCase());
-  };
+  }; */
 
   return (
     <Navbar bg="dark" expand="lg" variant="dark">
@@ -66,6 +66,8 @@ const MyNavbar = ({ onLogout }) => {
               <NavDropdown.Item as={Link} to="/phishing" onClick={() => handleItemClick('phishing')} className={selectedItem === 'phishing' ? 'active' : ''}>{t('phishing')}</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/malware" onClick={() => handleItemClick('malware')} className={selectedItem === 'malware' ? 'active' : ''}>{t('malware')}</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/ransomware" onClick={() => handleItemClick('ransomware')} className={selectedItem === 'ransomware' ? 'active' : ''}>{t('ransomware')}</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/spyware" onClick={() => handleItemClick('spyware')} className={selectedItem === 'spyware' ? 'active' : ''}>{t('Spyware')}</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/ddos" onClick={() => handleItemClick('ddos')} className={selectedItem === 'ddos' ? 'active' : ''}>{t('DDOS')}</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>
@@ -96,7 +98,7 @@ const MyNavbar = ({ onLogout }) => {
               </Nav.Link>
             </>
             )}
-            <NavDropdown title={language} id="language-dropdown">
+{/*             <NavDropdown title={language} id="language-dropdown">
               <NavDropdown.Item onClick={() => handleLanguageChange('PT')}>
                 <img src={ptFlag} alt="Portuguese" width="20" height="20" className="d-inline-block align-top" />{' '}
                 Português
@@ -105,7 +107,7 @@ const MyNavbar = ({ onLogout }) => {
                 <img src={enFlag} alt="English" width="20" height="20" className="d-inline-block align-top" />{' '}
                 English
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

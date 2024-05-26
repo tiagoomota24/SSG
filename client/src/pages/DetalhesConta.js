@@ -55,13 +55,16 @@ function DetalhesConta() {
             </Link>
           </div>
           <div className="input-box">
-            <label>Username</label>
+            <label>Utilizador</label>
             <input
               className="input-field"
               type="text"
               value={username}
               readOnly
             />
+            <Link to="/editar-username">
+              <MdEdit className="edit-icon" title="editar-username" />
+            </Link>
           </div>
           <div className="input-box">
             <label>Senha</label>

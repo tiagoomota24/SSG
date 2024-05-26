@@ -3,12 +3,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 50vh;
     background-color: #f9f9f9;
   }
   
   .activation h1 {
-    color: #333;
+    color: #4CAF50;
     margin-bottom: 20px;
   }
   

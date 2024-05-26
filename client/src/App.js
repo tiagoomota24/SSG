@@ -11,6 +11,7 @@ import Quiz from "./pages/Quiz";
 import DetalhesConta from "./pages/DetalhesConta";
 import EditPassword from "./pages/EditPassword";
 import EditEmail from "./pages/EditEmail";
+import EditUsername from "./pages/EditUsername";
 import Historico from "./pages/Historico";
 import { AuthContext } from "./helpers/AuthContex";
 import { useState, useEffect } from "react";
@@ -28,6 +29,8 @@ import AdminPage from "./pages/AdminPage";
 import Malware from "./pages/Malware";
 import Ransomware from "./pages/Ransomware";
 import Activation from "./pages/Activation";
+import Spyware from "./pages/Spyware";
+import DDOS from "./pages/Ddos";
 
 function App() {
 
@@ -84,8 +87,10 @@ function App() {
     <I18nextProvider i18n={i18n}>
       <AuthContext.Provider value={{authState, setAuthState}}>
       <Router>
+        <div id="root">
       <ToastContainer />
         <Nav />
+        <div className="main-content">
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={localStorage.getItem("accessToken") ? <Homepage /> : <Login />} />
@@ -93,12 +98,15 @@ function App() {
           <Route path="/phishing" element={<Phishing />} />
           <Route path="/malware" element={<Malware />} />
           <Route path="/ransomware" element={<Ransomware />} />
+          <Route path="/spyware" element={<Spyware />} />
+          <Route path="/ddos" element={<DDOS />} />
           <Route path="/jogos" element={<Jogos />} />
           <Route path="/tabela_de_classificacao" element={<Classificacao />} /> 
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/detalhes-da-conta" element={<DetalhesConta />} />
           <Route path="/editar-senha" element={<EditPassword />} />
           <Route path="/editar-email" element={<EditEmail />} />
+          <Route path="/editar-username" element={<EditUsername />} />
           <Route path="/historico" element={<Historico />} />
           <Route path="/depoimentos" element={<Depoimentos />} />
           <Route path="/forgotpassword" element={<Forgotpassword />} />
@@ -107,7 +115,9 @@ function App() {
           <Route path="/admin" element={authState.isAdmin ? <AdminPage /> : <Homepage />} />
           <Route path="/activation" element={<Activation />} />
         </Routes>
+        </div>
         <Footer />
+        </div>
       </Router>
       </AuthContext.Provider>
       </I18nextProvider>

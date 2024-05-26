@@ -9,6 +9,14 @@
   text-align: center;
 }
 
+.question-counter {
+  font-size: 1.2em;  /* Tamanho da fonte */
+  font-weight: bold;  /* Negrito */
+  color: #333;  /* Cor do texto */
+  margin-bottom: 10px;  /* Espaçamento inferior */
+  text-align: center;  /* Centralizar o texto */
+}
+
 /* Estilo dos botões */
 .btn {
   background-color: #17a2b8;

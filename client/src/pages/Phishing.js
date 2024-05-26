@@ -19,11 +19,13 @@ function Phishing() {
   const { authState } = useContext(AuthContext);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/phishing/phishingContent/1").then((response) => {
-      setContent(response.data);
-    }).catch((error) => {
-      console.error("Error fetching content:", error);
-    });
+    axios.get("http://localhost:3001/phishing/phishingContent/1")
+      .then((response) => {
+        setContent(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching content:", error);
+      });
   }, []);
 
   const toggleHowItWorks = () => {
@@ -47,7 +49,8 @@ function Phishing() {
       headers: { accessToken: localStorage.getItem("accessToken") },
     }).then((response) => {
       setEditMode(false);
-      alert("Content saved successfully!");
+      setContent(response.data); // Atualize o estado com o conteúdo salvo
+      alert("Conteudo foi guardado com sucesso!");
     }).catch((error) => {
       console.error("Error saving content:", error);
     });
@@ -61,7 +64,7 @@ function Phishing() {
         {editMode ? (
           <textarea name="intro" value={content.intro} onChange={handleInputChange} />
         ) : (
-          <p>{t('introId')}</p>
+          <p>{content.intro}</p>
         )}
       </div>
       <div className="expanding-container">
@@ -73,7 +76,7 @@ function Phishing() {
             {editMode ? (
               <textarea name="howItWorks" value={content.howItWorks} onChange={handleInputChange} />
             ) : (
-              <p>{t('howItWorksId')}</p>
+              <p>{content.howItWorks}</p>
             )}
           </div>
         )}
@@ -87,7 +90,7 @@ function Phishing() {
             {editMode ? (
               <textarea name="howToIdentify" value={content.howToIdentify} onChange={handleInputChange} />
             ) : (
-              <p>{t('howToIdentifyId')}</p>
+              <p>{content.howToIdentify}</p>
             )}
           </div>
         )}
