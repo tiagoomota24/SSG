@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/Forgotpassword.css";
 
-const PasswordResetRequest = () => {
+const Forgotpassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
@@ -52,4 +52,4 @@ const PasswordResetRequest = () => {
   );
 };
 
-export default PasswordResetRequest;
+export default Forgotpassword;

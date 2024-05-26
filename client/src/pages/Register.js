@@ -6,7 +6,7 @@ import "../styles/Login.css";
 import {useNavigate} from "react-router-dom";
 import { toast } from "react-toastify";
 
-function Registration() {
+function Register() {
 
   const navigate = useNavigate();
 
@@ -111,4 +111,4 @@ function Registration() {
   );
 }
 
-export default Registration;
+export default Register;
