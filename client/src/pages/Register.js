@@ -3,29 +3,35 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import "../styles/Login.css";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Register() {
-
   const navigate = useNavigate();
 
   const initialValues = {
     username: "",
     password: "",
     email: "",
-    confirmPassword: ""
-    };
+    confirmPassword: "",
+  };
 
   const validationSchema = Yup.object().shape({
-    username: Yup.string().min(3, 'O Utilizador deve ter pelo menos 3 caracteres').max(15, 'O Utilizador deve ter no máximo 15 caracteres').required('Obrigatório!'),
-    password: Yup.string().min(8, 'A senha deve ter pelo menos 8 caracteres').max(20, 'A senha deve ter no máximo 20 caracteres')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/,"Deve incluir maiúsculas, minúsculas e números")
-    .required('Obrigatório!'),
+    username: Yup.string()
+      .min(3, 'O Utilizador deve ter pelo menos 3 caracteres')
+      .max(15, 'O Utilizador deve ter no máximo 15 caracteres')
+      .required('Obrigatório!'),
+    password: Yup.string()
+      .min(8, 'A senha deve ter pelo menos 8 caracteres')
+      .max(20, 'A senha deve ter no máximo 20 caracteres')
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/, "Deve incluir maiúsculas, minúsculas e números")
+      .required('Obrigatório!'),
     email: Yup.string().email('O endereço de email é inválido').required('Obrigatório!'),
-    confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Palavra-passe deve corresponder').required('Confirmar a palavra-passe!'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Palavra-passe deve corresponder')
+      .required('Confirmar a palavra-passe!'),
   });
-   
+
   const onSubmit = async (data) => {
     try {
       const usernameResponse = await axios.post("https://ssg-2rzn.onrender.com/auth/checkUsername", { username: data.username });
@@ -46,6 +52,7 @@ function Register() {
       await axios.post("https://ssg-2rzn.onrender.com/auth/sendActivationEmail", { email: data.email });
       navigate("/activation");
     } catch (error) {
+      console.error('Erro ao criar conta:', error);
       toast.error('Erro ao criar conta!');
     }
   };
@@ -71,7 +78,7 @@ function Register() {
               <ErrorMessage name="username" component="span" />
             </div>
             <div className="input-box">
-            <label>Email: </label>
+              <label>Email: </label>
               <Field
                 autoComplete="off"
                 id="inputCreatePost2"
@@ -100,10 +107,10 @@ function Register() {
                 name="confirmPassword"
                 placeholder="Confirme a senha..."
               />
-                <ErrorMessage name="confirmPassword" component="span" />
+              <ErrorMessage name="confirmPassword" component="span" />
             </div>
-            <button type="submit"> Criar</button>
-            <button onClick={() => navigate("/login")}>Voltar</button>
+            <button type="submit">Criar</button>
+            <button type="button" onClick={() => navigate("/login")}>Voltar</button>
           </Form>
         </Formik>
       </div>
