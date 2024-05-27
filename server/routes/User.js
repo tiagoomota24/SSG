@@ -288,15 +288,9 @@ router.put("/users/:id/makeAdmin", validateToken, async (req, res) => {
 router.post("/sendActivationEmail", async (req, res) => {
   const { email } = req.body;
 
-  console.log(`Recebido pedido de ativação para o e-mail: ${email}`);  // Log de entrada
-
-  console.log('EMAIL:', process.env.EMAIL);
-  console.log('EMAIL_PASSWORD:', process.env.EMAIL_PASSWORD);
-
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      console.log("Utilizador não encontrado");  // Log de depuração
       return res.status(404).json({ message: "Utilizador não encontrado" });
     }
 
@@ -305,7 +299,6 @@ router.post("/sendActivationEmail", async (req, res) => {
     user.activationExpires = Date.now() + 3600000; // 1 hora
 
     await user.save();
-    console.log(`Token de ativação gerado: ${activationToken}`);  // Log para verificar se o token está sendo gerado
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',  // Corrigido para 'gmail' com 'g' minúsculo
@@ -327,7 +320,6 @@ router.post("/sendActivationEmail", async (req, res) => {
         console.error('Erro ao enviar e-mail:', error);  // Log de erro detalhado
         return res.status(500).json({ message: 'Erro ao enviar e-mail de ativação', error: error.toString() });
       }
-      console.log('E-mail enviado:', info.response);  // Log para verificar se o e-mail foi enviado
       res.status(200).json({ message: 'Código de ativação enviado para seu e-mail' });
     });
 
