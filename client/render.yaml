@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: react-static-site
-    env: static
-    static_publish_path: client/build
-    routes:
-      - src: /.*  # All routes should be handled by index.html
-        dest: /index.html

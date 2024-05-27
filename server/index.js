@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const contactRoutes = require('./routes/Contact');
-const path = require('path');
 require("dotenv").config();
 
 
@@ -22,15 +21,6 @@ app.use('/contact', contactRoutes);
 
 const phishingRouter = require("./routes/Phishing");
 app.use("/phishing", phishingRouter);
-
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
-
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-app.get('*', (_, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
-});
 
 db.sequelize.sync().then(() => {
   app.listen(process.env.PORT || 3001, () => {
