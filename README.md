@@ -78,5 +78,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Acknowledgements
 
 - [Render](https://render.com/) for hosting the application
-- [Your dependencies or any third-party tools/services you used]
+
 
